@@ -15,7 +15,8 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
     }
-    //IrEstadoAmbulancia desplaza la vista del teléfono entre actividades
+    /*La funcion IrEstadoAmbulancia cambia la vista del teléfono entre activity
+    */
     public void irEstadoAmbulancia(View v){
         Intent estadoAmbulancia = new Intent(getBaseContext(), estadoAmbulancia.class);
         startActivity(estadoAmbulancia);
