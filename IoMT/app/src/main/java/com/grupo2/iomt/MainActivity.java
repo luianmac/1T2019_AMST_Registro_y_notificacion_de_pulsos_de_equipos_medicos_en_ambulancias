@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.grupo2.iomt.dao.TokenDao;
 import com.grupo2.iomt.db.DB;
+import com.grupo2.iomt.entity.Token;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +30,16 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegistrarse = (Button) findViewById(R.id.btnRegistrarse);
+        
+        /* Ejemplo para usar base de datos
+
         DB db = instanceDB("mainDB");
+        TokenDao a = db.getTokenDAO();
+        Token aaa =  new Token("ahj");
+        a.insert(aaa);
+        a.getItems();
+
+        */
     }
 
     public void IniciarSesion(View view){
@@ -41,4 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         return db;
     }
+
+
 }
