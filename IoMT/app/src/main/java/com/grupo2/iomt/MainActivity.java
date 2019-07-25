@@ -65,13 +65,11 @@ public class MainActivity extends AppCompatActivity {
         final EditText dt2=(EditText) findViewById(R.id.txtPasswd);
         String usuario=dt1.getText().toString();
         String contrasena=dt2.getText().toString();
-        iniciarSesion(usuario,contrasena);
         if(CheckInternet.errorConexion()){
             Toast.makeText(this, "No hay conexion a Internet", Toast.LENGTH_LONG).show();
         }
         else{
-            Intent intent =new Intent(this,Menu.class);
-            startActivity(intent);
+            iniciarSesion(usuario,contrasena);
         }
 
     }
@@ -101,17 +99,19 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                 alertDialog.setTitle("Alerta");
                 alertDialog.setMessage("Credenciales Incorrectas");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int
-                                    which) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         });
                 alertDialog.show();
+
+                //Toast.makeText(getApplicationContext(),"Credenciales no correctas",Toast.LENGTH_LONG).show();
             }
         });
         mQueue.add(request);
