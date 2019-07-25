@@ -15,6 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".estadoAmbulancia"></activity>
+        <activity android:name=".GraficoPulsosActivity"></activity>
+        <activity android:name=".pulsosDeAmbulancia"></activity>
         <activity android:name=".Menu" />
         <activity android:name=".AlertActivity" />
         <activity android:name=".MainActivity">
