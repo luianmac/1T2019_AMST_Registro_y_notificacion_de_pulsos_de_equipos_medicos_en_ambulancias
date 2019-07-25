@@ -3,6 +3,7 @@ package com.grupo2.iomt;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.core.app.ActivityCompat;
 
 import android.app.Activity;
 import android.app.Application;
@@ -46,7 +47,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class GraficoPulsosActivity extends Activity {
+public class GraficoPulsosActivity extends AppCompatActivity {
     BarChart barChart;
     String token;
     String urlRegistoPulsos = "https://amstdb.herokuapp.com/db/registroDePulsos";
