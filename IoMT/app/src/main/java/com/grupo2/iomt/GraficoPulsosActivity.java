@@ -59,6 +59,7 @@ public class GraficoPulsosActivity extends Activity {
     ArrayList<Pulso> pulsos;
     Map<String, String> params;
     Map<String, String> prioridades;
+    Map<String, String> codseñales;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +80,22 @@ public class GraficoPulsosActivity extends Activity {
         pulsos = new ArrayList<>();
 
         prioridades = new HashMap<>();
-        prioridades.put("SED", "Baja");
-        prioridades.put("HIP", "Alta");
-        prioridades.put("PAB", "Medio");
-        prioridades.put("ARR", "Baja");
-        prioridades.put("PCA", "Media");
-            prioridades.put("PAA", "Alta");
+        prioridades.put("Desconocida", "Baja");
+        prioridades.put("Hiperpirexia", "Alta");
+        prioridades.put("Presion Arterial Baja", "Medio");
+        prioridades.put("Arritmia", "Baja");
+        prioridades.put("Paro Cardiaco", "Alta");
+        prioridades.put("Presion Arterial Alta", "Medio");
+
+        codseñales = new HashMap<>();
+            codseñales.put("SED", "Desconocida");
+            codseñales.put("HIP", "Hiperpirexia");
+            codseñales.put("PAB", "Presion Arterial Baja");
+            codseñales.put("ARR", "Arritmia");
+            codseñales.put("PCA", "Paro Cardiaco");
+            codseñales.put("PAA", "Presion Arterial Alta");
+
+
 
         obtenerRegistros();
         obtenerAmbulancias();
@@ -242,6 +253,8 @@ public class GraficoPulsosActivity extends Activity {
                                 JSONObject pulsoJ = response.getJSONObject(i);
                                 int id = pulsoJ.getInt("id");
                                 String nombre = pulsoJ.getString("nombre");
+                                if(codseñales.containsKey(nombre))
+                                    nombre = codseñales.get(nombre);
                                 int  numero_pulsos = pulsoJ.getInt("numero_pulsos");
                                 String descripcion = pulsoJ.getString("descripcion");
                                 Pulso pulso = new Pulso(id,nombre,numero_pulsos,descripcion);
@@ -305,7 +318,7 @@ public class GraficoPulsosActivity extends Activity {
             textView.setGravity(Gravity.CENTER);
             textView.setText(value);
             textView.setTextColor(Color.BLACK);
-            textView.setPaddingRelative(130,0,130,0);
+            textView.setPaddingRelative(90,0,90,0);
             row.addView(textView);
         }
         table.addView(row);
