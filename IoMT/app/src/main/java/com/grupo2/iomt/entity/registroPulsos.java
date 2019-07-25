@@ -9,16 +9,18 @@ import java.time.format.DateTimeFormatter;
 public class registroPulsos {
 
     private int id;
-    private String fecha_registro;
+    private String fecha;
+    private String hora;
     private int id_pulso;
     private int id_ambulancia;
 
     public registroPulsos() {
     }
 
-    public registroPulsos(int id, String fecha_registro, int id_pulso, int id_ambulancia) {
+    public registroPulsos(int id, String fecha, String hora, int id_pulso, int id_ambulancia) {
         this.id = id;
-        this.fecha_registro = fecha_registro;
+        this.fecha = fecha;
+        this.hora = hora;
         this.id_pulso = id_pulso;
         this.id_ambulancia = id_ambulancia;
     }
@@ -31,12 +33,20 @@ public class registroPulsos {
         this.id = id;
     }
 
-    public String getFecha_registro() {
-        return fecha_registro;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setFecha_registro(String fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public int getId_pulso() {
@@ -55,6 +65,7 @@ public class registroPulsos {
         this.id_ambulancia = id_ambulancia;
     }
 
+    /*
     @Override
     public String toString() {
 
@@ -66,4 +77,5 @@ public class registroPulsos {
                 "Pulso:                 " + id_pulso + "\n" +
                 "Ambulancia:            " + id_ambulancia;
     }
+    */
 }
