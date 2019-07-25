@@ -23,9 +23,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.grupo2.iomt.entity.Ambulancia;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -33,12 +36,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class estadoAmbulancia extends AppCompatActivity {
-
-    //private EditText editTxt;
+    //Declaración de variables a usar
     private Button btn;
     private ListView list;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> arrayList;
+    private ArrayAdapter<Ambulancia> adapter;
+    private ArrayList<Ambulancia> arrayList;
     private RequestQueue mQueue;
     private String token = "";
 
@@ -53,39 +55,50 @@ public class estadoAmbulancia extends AppCompatActivity {
         btn = (Button) findViewById(R.id.button);
         list = (ListView) findViewById(R.id.listView);
 
-        arrayList = new ArrayList<String>();
+        arrayList = new ArrayList<Ambulancia>();
 
-        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_layout, arrayList);
+        adapter = new ArrayAdapter<Ambulancia>(getApplicationContext(), R.layout.custom_layout, arrayList);
         list.setAdapter(adapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), "este es " + list.getItemAtPosition(position), Toast.LENGTH_LONG).show();
+                Intent pulsos = new Intent(getBaseContext(),pulsosDeAmbulancia.class);
+                //System.out.println("ESSSSTOOOOO             " + position);
+                pulsos.putExtra("idAmbulancia", position);
+                pulsos.putExtra("token", token);
+                startActivity(pulsos);
+
             }
         });
 
-       /* btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                /*arrayList.add(editTxt.getText().toString());
-                adapter.notifyDataSetChanged();
-                editTxt.setText(" ");
+                actualizar();
             }
         });
     }
 
-    /*private void revisarAmbulancias(String url, final ArrayList<String> arrayList){
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
+    /*Método que permite la conexión a la base de datos y capturar los datos
+    *los cuales son almacenados en un array para presentarlos mediante un ListView
+    */
+    private void actualizar(){
+
+        String url_temp = "https://amstdb.herokuapp.com/db/ambulancia";
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET, url_temp, null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println(response);
+                    public void onResponse(JSONArray response) {
                         try {
-                            arrayList.add("Placa: "+response.getString("plca")+"\n"+"Ocupado:    "+response.getString("ocupado")+"\n"+"Conductor        : "+response.getString("Conductor"));
+                            arrayList.clear();
+                            System.out.println("PRUEBA:" +response.toString());
+                            for(int i = 0; i<response.length(); i++){
+                                JSONObject j = (JSONObject) response.get(i);
+                                arrayList.add(new Ambulancia(j.getInt("id"), j.getString("placa"), j.getBoolean("ocupado"), j.getInt("conductor")));
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -93,6 +106,7 @@ public class estadoAmbulancia extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println("NO ES POSIBLE OBTENER DATA");
             }
         }){
             @Override
@@ -103,49 +117,8 @@ public class estadoAmbulancia extends AppCompatActivity {
                 System.out.println(token);
                 return params;
             }
-        };
+        };;
         mQueue.add(request);
-    }*/
+        adapter.notifyDataSetChanged();
     }
-        public void actualizar(View view){
-            // for(int i=1; i<3; i++) {
-            //
-            String url = "https://amstdb.herokuapp.com/db/ambulancia/2";
-            //revisarAmbulancias(url, arrayList);
-
-
-            JsonObjectRequest request = new JsonObjectRequest(
-                    Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            System.out.println(response);
-                            try {
-                                arrayList.add("Placa: " + response.getString("placa") + "\n" + "Ocupado:    " + response.getString("ocupado") + "\n" + "Conductor        : " + response.getString("conductor"));
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("Authorization", "JWT " + token);
-                    System.out.println(token);
-                    return params;
-                }
-            };
-            mQueue.add(request);
-
-            adapter.notifyDataSetChanged();
-           // arrayList.clear();
-
-        }
-    }
-
-
+}
