@@ -25,4 +25,14 @@ public class Menu extends AppCompatActivity {
         estado.putExtra("token", token);
         startActivity(estado);
     }
+    public void irGraficoPulsos(View v){
+        Intent graficos = new Intent(getBaseContext(),GraficoPulsosActivity.class);
+        graficos.putExtra("token", token);
+        startActivity(graficos);
+    }
+
+    public void salir(View v){
+        Intent Main = new Intent(getBaseContext(),MainActivity.class);
+        startActivity(Main);
+    }
 }
