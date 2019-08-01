@@ -19,6 +19,10 @@ public class Token {
     @ColumnInfo(name = "token_string")
     private String token_string;
 
+    public Token(String token_string) {
+        this.token_string = token_string;
+    }
+
     //---functions
     @Override
     public String toString(){

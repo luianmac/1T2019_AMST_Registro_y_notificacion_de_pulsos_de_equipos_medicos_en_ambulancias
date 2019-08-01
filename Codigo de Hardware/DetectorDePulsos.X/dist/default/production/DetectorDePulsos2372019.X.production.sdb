@@ -1,0 +1,466 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F18875 ]
+[d frameptr 6 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"53 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\main.c
+[v _main main `(v  1 e 1 0 ]
+"85 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/eusart.c
+[v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+"148
+[v _EUSART_Read EUSART_Read `(uc  1 e 1 0 ]
+"170
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
+"203
+[v _EUSART_Transmit_ISR EUSART_Transmit_ISR `(v  1 e 1 0 ]
+"222
+[v _EUSART_Receive_ISR EUSART_Receive_ISR `(v  1 e 1 0 ]
+"246
+[v _EUSART_RxDataHandler EUSART_RxDataHandler `(v  1 e 1 0 ]
+"256
+[v _EUSART_DefaultFramingErrorHandler EUSART_DefaultFramingErrorHandler `(v  1 e 1 0 ]
+"258
+[v _EUSART_DefaultOverrunErrorHandler EUSART_DefaultOverrunErrorHandler `(v  1 e 1 0 ]
+"266
+[v _EUSART_DefaultErrorHandler EUSART_DefaultErrorHandler `(v  1 e 1 0 ]
+"270
+[v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
+"274
+[v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
+"278
+[v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
+"282
+[v _EUSART_SetTxInterruptHandler EUSART_SetTxInterruptHandler `(v  1 e 1 0 ]
+"286
+[v _EUSART_SetRxInterruptHandler EUSART_SetRxInterruptHandler `(v  1 e 1 0 ]
+"33 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/ext_int.c
+[v _INT_ISR INT_ISR `(v  1 e 1 0 ]
+"43
+[v _INT_CallBack INT_CallBack `(v  1 e 1 0 ]
+"52
+[v _INT_SetInterruptHandler INT_SetInterruptHandler `(v  1 e 1 0 ]
+"56
+[v _INT_DefaultInterruptHandler INT_DefaultInterruptHandler `(v  1 e 1 0 ]
+"63
+[v _EXT_INT_Initialize EXT_INT_Initialize `(v  1 e 1 0 ]
+"52 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+"50 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"60
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"74
+[v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
+"57 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"132
+[v _obtenerTipoPulso obtenerTipoPulso `(i  1 e 2 0 ]
+"63 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/tmr0.c
+[v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
+"123
+[v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
+"136
+[v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
+"140
+[v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
+"96 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X/mcc_generated_files/eusart.h
+[v _EUSART_TxDefaultInterruptHandler EUSART_TxDefaultInterruptHandler `*.37(v  1 e 2 0 ]
+"97
+[v _EUSART_RxDefaultInterruptHandler EUSART_RxDefaultInterruptHandler `*.37(v  1 e 2 0 ]
+"59 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X/mcc_generated_files/mcc.h
+[v _contDePulsos contDePulsos `i  1 e 2 0 ]
+[s S146 . 1 `uc 1 INTEDG 1 0 :1:0 
+`uc 1 . 1 0 :5:1 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"364 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f18875.h
+[u S151 . 1 `S146 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES151  1 e 1 @11 ]
+"670
+[v _TRISA TRISA `VEuc  1 e 1 @17 ]
+"732
+[v _TRISB TRISB `VEuc  1 e 1 @18 ]
+"794
+[v _TRISC TRISC `VEuc  1 e 1 @19 ]
+"856
+[v _TRISD TRISD `VEuc  1 e 1 @20 ]
+"918
+[v _TRISE TRISE `VEuc  1 e 1 @21 ]
+"950
+[v _LATA LATA `VEuc  1 e 1 @22 ]
+"1012
+[v _LATB LATB `VEuc  1 e 1 @23 ]
+"1074
+[v _LATC LATC `VEuc  1 e 1 @24 ]
+"1136
+[v _LATD LATD `VEuc  1 e 1 @25 ]
+"1198
+[v _LATE LATE `VEuc  1 e 1 @26 ]
+"1230
+[v _TMR0L TMR0L `VEuc  1 e 1 @28 ]
+"1368
+[v _TMR0H TMR0H `VEuc  1 e 1 @29 ]
+"1622
+[v _T0CON0 T0CON0 `VEuc  1 e 1 @30 ]
+[s S261 . 1 `uc 1 T0OUTPS 1 0 :4:0 
+`uc 1 T016BIT 1 0 :1:4 
+`uc 1 T0OUT 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 T0EN 1 0 :1:7 
+]
+"1642
+[s S267 . 1 `uc 1 T0OUTPS0 1 0 :1:0 
+`uc 1 T0OUTPS1 1 0 :1:1 
+`uc 1 T0OUTPS2 1 0 :1:2 
+`uc 1 T0OUTPS3 1 0 :1:3 
+]
+[u S272 . 1 `S261 1 . 1 0 `S267 1 . 1 0 ]
+[v _T0CON0bits T0CON0bits `VES272  1 e 1 @30 ]
+"1687
+[v _T0CON1 T0CON1 `VEuc  1 e 1 @31 ]
+"3770
+[v _RC1REG RC1REG `VEuc  1 e 1 @281 ]
+"3824
+[v _TX1REG TX1REG `VEuc  1 e 1 @282 ]
+"3885
+[v _SP1BRGL SP1BRGL `VEuc  1 e 1 @283 ]
+"3955
+[v _SP1BRGH SP1BRGH `VEuc  1 e 1 @284 ]
+"4009
+[v _RC1STA RC1STA `VEuc  1 e 1 @285 ]
+[s S426 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"4035
+[u S435 . 1 `S426 1 . 1 0 ]
+[v _RC1STAbits RC1STAbits `VES435  1 e 1 @285 ]
+"4189
+[v _TX1STA TX1STA `VEuc  1 e 1 @286 ]
+[s S404 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"4215
+[u S413 . 1 `S404 1 . 1 0 ]
+[v _TX1STAbits TX1STAbits `VES413  1 e 1 @286 ]
+"4369
+[v _BAUD1CON BAUD1CON `VEuc  1 e 1 @287 ]
+[s S125 . 1 `uc 1 INTF 1 0 :1:0 
+`uc 1 . 1 0 :3:1 
+`uc 1 IOCIF 1 0 :1:4 
+`uc 1 TMR0IF 1 0 :1:5 
+]
+"21425
+[u S130 . 1 `S125 1 . 1 0 ]
+[v _PIR0bits PIR0bits `VES130  1 e 1 @1804 ]
+[s S176 . 1 `uc 1 SSP1IF 1 0 :1:0 
+`uc 1 BCL1IF 1 0 :1:1 
+`uc 1 SSP2IF 1 0 :1:2 
+`uc 1 BCL2IF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+]
+"21532
+[u S183 . 1 `S176 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES183  1 e 1 @1807 ]
+[s S112 . 1 `uc 1 INTE 1 0 :1:0 
+`uc 1 . 1 0 :3:1 
+`uc 1 IOCIE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+"21847
+[u S117 . 1 `S112 1 . 1 0 ]
+[v _PIE0bits PIE0bits `VES117  1 e 1 @1814 ]
+[s S159 . 1 `uc 1 SSP1IE 1 0 :1:0 
+`uc 1 BCL1IE 1 0 :1:1 
+`uc 1 SSP2IE 1 0 :1:2 
+`uc 1 BCL2IE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+]
+"21954
+[u S166 . 1 `S159 1 . 1 0 ]
+[v _PIE3bits PIE3bits `VES166  1 e 1 @1817 ]
+"22256
+[v _PMD0 PMD0 `VEuc  1 e 1 @1942 ]
+"22313
+[v _PMD1 PMD1 `VEuc  1 e 1 @1943 ]
+"22384
+[v _PMD2 PMD2 `VEuc  1 e 1 @1944 ]
+"22429
+[v _PMD3 PMD3 `VEuc  1 e 1 @1945 ]
+"22485
+[v _PMD4 PMD4 `VEuc  1 e 1 @1946 ]
+"22536
+[v _PMD5 PMD5 `VEuc  1 e 1 @1947 ]
+"23607
+[v _OSCCON1 OSCCON1 `VEuc  1 e 1 @2189 ]
+"23747
+[v _OSCCON3 OSCCON3 `VEuc  1 e 1 @2191 ]
+"23844
+[v _OSCEN OSCEN `VEuc  1 e 1 @2193 ]
+"23895
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @2194 ]
+"23953
+[v _OSCFRQ OSCFRQ `VEuc  1 e 1 @2195 ]
+"30066
+[v _INTPPS INTPPS `VEuc  1 e 1 @3728 ]
+"31984
+[v _RXPPS RXPPS `VEuc  1 e 1 @3787 ]
+"33188
+[v _RC6PPS RC6PPS `VEuc  1 e 1 @3878 ]
+"33838
+[v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
+"33900
+[v _WPUA WPUA `VEuc  1 e 1 @3897 ]
+"33962
+[v _ODCONA ODCONA `VEuc  1 e 1 @3898 ]
+"34024
+[v _SLRCONA SLRCONA `VEuc  1 e 1 @3899 ]
+"34458
+[v _ANSELB ANSELB `VEuc  1 e 1 @3907 ]
+"34520
+[v _WPUB WPUB `VEuc  1 e 1 @3908 ]
+"34582
+[v _ODCONB ODCONB `VEuc  1 e 1 @3909 ]
+"34644
+[v _SLRCONB SLRCONB `VEuc  1 e 1 @3910 ]
+"35078
+[v _ANSELC ANSELC `VEuc  1 e 1 @3918 ]
+"35140
+[v _WPUC WPUC `VEuc  1 e 1 @3919 ]
+"35202
+[v _ODCONC ODCONC `VEuc  1 e 1 @3920 ]
+"35264
+[v _SLRCONC SLRCONC `VEuc  1 e 1 @3921 ]
+"35698
+[v _ANSELD ANSELD `VEuc  1 e 1 @3929 ]
+"35760
+[v _WPUD WPUD `VEuc  1 e 1 @3930 ]
+"35822
+[v _ODCOND ODCOND `VEuc  1 e 1 @3931 ]
+"35884
+[v _SLRCOND SLRCOND `VEuc  1 e 1 @3932 ]
+"36132
+[v _ANSELE ANSELE `VEuc  1 e 1 @3940 ]
+"36164
+[v _WPUE WPUE `VEuc  1 e 1 @3941 ]
+"36202
+[v _ODCONE ODCONE `VEuc  1 e 1 @3942 ]
+"36234
+[v _SLRCONE SLRCONE `VEuc  1 e 1 @3943 ]
+"62 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/eusart.c
+[v _eusartTxHead eusartTxHead `VEuc  1 e 1 0 ]
+"63
+[v _eusartTxTail eusartTxTail `VEuc  1 e 1 0 ]
+"64
+[v _eusartTxBuffer eusartTxBuffer `VE[8]uc  1 e 8 0 ]
+"65
+[v _eusartTxBufferRemaining eusartTxBufferRemaining `VEuc  1 e 1 0 ]
+"67
+[v _eusartRxHead eusartRxHead `VEuc  1 e 1 0 ]
+"68
+[v _eusartRxTail eusartRxTail `VEuc  1 e 1 0 ]
+"69
+[v _eusartRxBuffer eusartRxBuffer `VE[8]uc  1 e 8 0 ]
+[s S328 . 1 `uc 1 perr 1 0 :1:0 
+`uc 1 ferr 1 0 :1:1 
+`uc 1 oerr 1 0 :1:2 
+`uc 1 reserved 1 0 :5:3 
+]
+"70
+[u S333 . 1 `S328 1 . 1 0 `uc 1 status 1 0 ]
+[v _eusartRxStatusBuffer eusartRxStatusBuffer `VE[8]S333  1 e 8 0 ]
+"71
+[v _eusartRxCount eusartRxCount `VEuc  1 e 1 0 ]
+"72
+[v _eusartRxLastError eusartRxLastError `VES333  1 e 1 0 ]
+"77
+[v _EUSART_FramingErrorHandler EUSART_FramingErrorHandler `*.37(v  1 e 2 0 ]
+"78
+[v _EUSART_OverrunErrorHandler EUSART_OverrunErrorHandler `*.37(v  1 e 2 0 ]
+"79
+[v _EUSART_ErrorHandler EUSART_ErrorHandler `*.37(v  1 e 2 0 ]
+"31 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/ext_int.c
+[v _INT_InterruptHandler INT_InterruptHandler `*.37(v  1 e 2 0 ]
+"61 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/tmr0.c
+[v _TMR0_InterruptHandler TMR0_InterruptHandler `*.37(v  1 e 2 0 ]
+"53 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"81
+} 0
+"50 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"58
+} 0
+"63 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/tmr0.c
+[v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
+{
+"87
+} 0
+"136
+[v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 0 ]
+"138
+} 0
+"74 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/mcc.c
+[v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
+{
+"88
+} 0
+"57 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"123
+} 0
+"60 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"72
+} 0
+"63 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/ext_int.c
+[v _EXT_INT_Initialize EXT_INT_Initialize `(v  1 e 1 0 ]
+{
+"74
+} 0
+"52
+[v _INT_SetInterruptHandler INT_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v INT_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 0 ]
+"54
+} 0
+"85 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/eusart.c
+[v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+{
+"127
+} 0
+"282
+[v _EUSART_SetTxInterruptHandler EUSART_SetTxInterruptHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetTxInterruptHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+"284
+} 0
+"286
+[v _EUSART_SetRxInterruptHandler EUSART_SetRxInterruptHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetRxInterruptHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+"288
+} 0
+"274
+[v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+"276
+} 0
+"270
+[v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+"272
+} 0
+"278
+[v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 0 ]
+"280
+} 0
+"52 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+{
+"82
+} 0
+"123 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/tmr0.c
+[v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
+{
+"133
+} 0
+"140
+[v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"143
+[v TMR0_DefaultInterruptHandler@TipoPulso TipoPulso `i  1 a 2 8 ]
+"152
+} 0
+"132 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/pin_manager.c
+[v _obtenerTipoPulso obtenerTipoPulso `(i  1 e 2 0 ]
+{
+[v obtenerTipoPulso@contDePulsos contDePulsos `*.1i  1 a 1 wreg ]
+[v obtenerTipoPulso@contDePulsos contDePulsos `*.1i  1 a 1 wreg ]
+[v obtenerTipoPulso@contDePulsos contDePulsos `*.1i  1 a 1 7 ]
+"164
+} 0
+"170 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/eusart.c
+[v _EUSART_Write EUSART_Write `(v  1 e 1 0 ]
+{
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 wreg ]
+[v EUSART_Write@txData txData `uc  1 a 1 1 ]
+"191
+} 0
+"33 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/ext_int.c
+[v _INT_ISR INT_ISR `(v  1 e 1 0 ]
+{
+"40
+} 0
+"43
+[v _INT_CallBack INT_CallBack `(v  1 e 1 0 ]
+{
+"50
+} 0
+"56
+[v _INT_DefaultInterruptHandler INT_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"61
+} 0
+"203 I:\APLICACIONE S MOVILES\DetectorDePulsos2372019.X\mcc_generated_files/eusart.c
+[v _EUSART_Transmit_ISR EUSART_Transmit_ISR `(v  1 e 1 0 ]
+{
+"220
+} 0
+"222
+[v _EUSART_Receive_ISR EUSART_Receive_ISR `(v  1 e 1 0 ]
+{
+"244
+} 0
+"258
+[v _EUSART_DefaultOverrunErrorHandler EUSART_DefaultOverrunErrorHandler `(v  1 e 1 0 ]
+{
+"264
+} 0
+"256
+[v _EUSART_DefaultFramingErrorHandler EUSART_DefaultFramingErrorHandler `(v  1 e 1 0 ]
+{
+} 0
+"266
+[v _EUSART_DefaultErrorHandler EUSART_DefaultErrorHandler `(v  1 e 1 0 ]
+{
+"268
+} 0
+"246
+[v _EUSART_RxDataHandler EUSART_RxDataHandler `(v  1 e 1 0 ]
+{
+"254
+} 0
