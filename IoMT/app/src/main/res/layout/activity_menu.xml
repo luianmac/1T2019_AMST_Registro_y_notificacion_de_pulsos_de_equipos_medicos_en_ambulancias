@@ -29,10 +29,18 @@
             android:onClick="irEstadoAmbulancia"/>
 
         <Button
+            android:id="@+id/buttonBarChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grafico de pulsos"
+            android:onClick="irGraficoPulsos"/>
+
+        <Button
             android:id="@+id/btnSalir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salir" />
+            android:text="Salir"
+            android:onClick="salir"/>
 
     </LinearLayout>
 

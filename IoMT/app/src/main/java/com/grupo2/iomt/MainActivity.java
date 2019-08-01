@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,12 +18,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.grupo2.iomt.dao.TokenDao;
 import com.grupo2.iomt.db.DB;
+import com.grupo2.iomt.entity.Token;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import java.io.IOException;
+import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnLogin, btnRegistrarse;
@@ -41,7 +47,17 @@ public class MainActivity extends AppCompatActivity {
         mQueue= Volley.newRequestQueue(this);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegistrarse = (Button) findViewById(R.id.btnRegistrarse);
+
+
+        /* Ejemplo para usar base de datos
+
         DB db = instanceDB("mainDB");
+        TokenDao a = db.getTokenDAO();
+        Token aaa =  new Token("ahj");
+        a.insert(aaa);
+        a.getItems();
+
+        */
     }
 
     public void IniciarSesion(View view){
@@ -49,7 +65,13 @@ public class MainActivity extends AppCompatActivity {
         final EditText dt2=(EditText) findViewById(R.id.txtPasswd);
         String usuario=dt1.getText().toString();
         String contrasena=dt2.getText().toString();
-        iniciarSesion(usuario,contrasena);
+        if(CheckInternet.errorConexion()){
+            Toast.makeText(this, "No hay conexion a Internet", Toast.LENGTH_LONG).show();
+        }
+        else{
+            iniciarSesion(usuario,contrasena);
+        }
+
     }
 
     private void iniciarSesion(String usuario, String contrasena) {
@@ -77,17 +99,19 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                 alertDialog.setTitle("Alerta");
                 alertDialog.setMessage("Credenciales Incorrectas");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int
-                                    which) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         });
                 alertDialog.show();
+
+                //Toast.makeText(getApplicationContext(),"Credenciales no correctas",Toast.LENGTH_LONG).show();
             }
         });
         mQueue.add(request);
@@ -99,4 +123,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         return db;
     }
+
+
+
+
 }
