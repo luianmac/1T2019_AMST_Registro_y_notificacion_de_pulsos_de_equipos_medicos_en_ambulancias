@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "764642093053",
+    "firebase_url": "https://iomt-ca0ed.firebaseio.com",
+    "project_id": "iomt-ca0ed",
+    "storage_bucket": "iomt-ca0ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764642093053:android:3d7ccc3a15a75c0f",
+        "android_client_info": {
+          "package_name": "com.grupo2.iomt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764642093053-g0f04hpie2apnm8gqgpa2nlfb5ajgod6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.grupo2.iomt",
+            "certificate_hash": "f9e76475866e030969579f4d3cc1f665ab583b01"
+          }
+        },
+        {
+          "client_id": "764642093053-l85fo8o4gji4v1tiaervkf1lqvcjhdiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE7Nc8VuJKcjBUA9TkeMt5Oepi0wcQhkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764642093053-l85fo8o4gji4v1tiaervkf1lqvcjhdiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
