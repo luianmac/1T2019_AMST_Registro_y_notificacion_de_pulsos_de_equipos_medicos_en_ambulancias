@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("Passwd", contrasena);
         editor.commit();
 
-        if(!CheckInternet.errorConexion()){
+        if(CheckInternet.errorConexion()){
             Toast.makeText(this, "No hay conexion a Internet", Toast.LENGTH_LONG).show();
         }
         else{
