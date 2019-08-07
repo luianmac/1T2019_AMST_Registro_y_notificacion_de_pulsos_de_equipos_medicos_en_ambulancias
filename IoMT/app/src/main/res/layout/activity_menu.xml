@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="395dp"
-        android:layout_height="340dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
@@ -25,22 +25,29 @@
             android:id="@+id/btnBateria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estado de la ambulancia"
-            android:onClick="irEstadoAmbulancia"/>
+            android:onClick="irEstadoAmbulancia"
+            android:text="Estado de la ambulancia" />
 
         <Button
             android:id="@+id/buttonBarChart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Grafico de pulsos"
-            android:onClick="irGraficoPulsos"/>
+            android:onClick="irGraficoPulsos"
+            android:text="Grafico de pulsos" />
 
         <Button
             android:id="@+id/btnSalir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salir"
-            android:onClick="salir"/>
+            android:onClick="salir"
+            android:text="Salir" />
+
+        <Button
+            android:id="@+id/btnSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="cerrarSesion"
+            android:text="Cerrar Sesion" />
 
     </LinearLayout>
 

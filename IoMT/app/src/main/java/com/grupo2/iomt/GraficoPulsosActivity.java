@@ -62,6 +62,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
     Map<String, String> prioridades;
     Map<String, String> codseñales;
 
+
+    Handler handler;
+    Runnable runnable;
+
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +100,32 @@ public class GraficoPulsosActivity extends AppCompatActivity {
             codseñales.put("PCA", "Paro Cardiaco");
             codseñales.put("PAA", "Presion Arterial Alta");
 
+       handler = new Handler();
+       runnable = new Runnable() {
+           @Override
+           public void run() {
+               registroPulsos = new ArrayList<>();
+               ambulancias = new ArrayList<>();
+               pulsos = new ArrayList<>();
 
+               actualizar();
+               handler.postDelayed(this, 8000);
+           }
+       };
+       runnable.run();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacks(runnable);
+
+        super.onBackPressed();
+
+    }
+
+    public void actualizar(){
+        System.out.println("Acccccccccc");
 
         obtenerRegistros();
         obtenerAmbulancias();
@@ -105,6 +134,8 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                table.removeAllViews();
+
                 addAmbulaciaAndPulso(registroPulsos);
                 ((TextView) findViewById(R.id.title_Table)).setVisibility(View.VISIBLE);
                 crearTablaRegistros(registroPulsos);
@@ -114,11 +145,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
                 barChart.notifyDataSetChanged();
                 barChart.invalidate();
                 //init_values_Barchart(barChart);
-
-
             }
         }, 2000);
     }
+
     public void setDataBarchart(BarChart barChart, Map<String, Integer> map){
             String[] labels = new String[map.keySet().size()];
             ArrayList<BarEntry> barEntries = new ArrayList<>();
@@ -158,6 +188,7 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1);
         xAxis.setCenterAxisLabels(true);
+        xAxis.setLabelRotationAngle(45);
 
     }
     public void init_Barchart(BarChart barChart){
