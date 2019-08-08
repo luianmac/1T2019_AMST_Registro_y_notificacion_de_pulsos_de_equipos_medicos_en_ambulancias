@@ -85,12 +85,13 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         pulsos = new ArrayList<>();
 
         prioridades = new HashMap<>();
-        prioridades.put("Desconocida", "Baja");
+        prioridades.put("Señal desconocida", "Baja");
         prioridades.put("Hiperpirexia", "Alta");
-        prioridades.put("Presion Arterial Baja", "Medio");
+        prioridades.put("Presion arterial baja", "Medio");
         prioridades.put("Arritmia", "Baja");
-        prioridades.put("Paro Cardiaco", "Alta");
-        prioridades.put("Presion Arterial Alta", "Medio");
+        prioridades.put("Paro cardiaco", "Alta");
+        prioridades.put("Presion arterial alta", "Medio");
+        prioridades.put("Sin señal", "Baja");
 
         codseñales = new HashMap<>();
             codseñales.put("SED", "Desconocida");
@@ -331,6 +332,7 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
     public void addRow(final TableLayout table, String[] cells, final int id){
         TableRow row = new TableRow(getApplicationContext());
+        row.setLayoutParams(table.getLayoutParams());
         row.setGravity(Gravity.CENTER);
         row.setPadding(0,0,0,20);
         if(id >= 0) {
@@ -350,7 +352,8 @@ public class GraficoPulsosActivity extends AppCompatActivity {
             textView.setGravity(Gravity.CENTER);
             textView.setText(value);
             textView.setTextColor(Color.BLACK);
-            textView.setPaddingRelative(90,0,90,0);
+            textView.setPaddingRelative(50,0,50,0);
+            //textView.setLayoutParams(row.getLayoutParams());
             row.addView(textView);
         }
         table.addView(row);
@@ -414,6 +417,7 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         placa.setText("Placa: " + registroPulso.ambulancia.placa);
         conductor.setText("Conductor: " + String.valueOf(registroPulso.ambulancia.conductor));
         try{
+            System.out.println(registroPulso.pulso.nombre);
             prioridad.setText("Prioridad " + prioridades.get(registroPulso.pulso.nombre));
         }
         catch (Exception e){
