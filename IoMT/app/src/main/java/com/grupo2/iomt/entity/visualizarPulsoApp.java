@@ -2,28 +2,27 @@ package com.grupo2.iomt.entity;
 
 public class visualizarPulsoApp {
 
-    private int id;
+    private String nombrePulso;
     private String fecha;
     private String hora;
-    private String pulso;
-    private int ambulancia;
+    private String descripcion;
+    private int numPulsos;
 
-
-
-    public visualizarPulsoApp(int id, String fecha, String hora, String pulso, int ambulancia) {
-        this.id = id;
+    public visualizarPulsoApp(String nombrePulso, String fecha, String hora, String descripcion, int numPulsos) {
+        this.nombrePulso = nombrePulso;
         this.fecha = fecha;
         this.hora = hora;
-        this.pulso = pulso;
-        this.ambulancia = ambulancia;
+        this.descripcion = descripcion;
+        this.numPulsos = numPulsos;
     }
 
-    public int getId() {
-        return id;
+
+    public String getNombrePulso() {
+        return nombrePulso;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNombrePulso(String nombrePulso) {
+        this.nombrePulso = nombrePulso;
     }
 
     public String getFecha() {
@@ -42,28 +41,28 @@ public class visualizarPulsoApp {
         this.hora = hora;
     }
 
-    public String getPulso() {
-        return pulso;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setPulso(String pulso) {
-        this.pulso = pulso;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public int getAmbulancia() {
-        return ambulancia;
+    public int getNumPulsos() {
+        return numPulsos;
     }
 
-    public void setAmbulancia(int ambulancia) {
-        this.ambulancia = ambulancia;
+    public void setNumPulsos(int numPulsos) {
+        this.numPulsos = numPulsos;
     }
 
     @Override
     public String toString() {
-        return  "ID:        " + id + "\n" +
-                "Fecha:     " + fecha + "\n" +
-                "Hora:      " + hora + "\n" +
-                "Pulso:     " + pulso + "\n" +
-                "Ambulancia:" + ambulancia;
+        return  "Nombre de Pulso: " + nombrePulso + "\n" +
+                "Fecha:           " + fecha + "\n" +
+                "Hora:            " + hora + "\n" +
+                "Descripcion:     " + descripcion + "\n" +
+                "Numero de Pulsos " + numPulsos;
     }
 }

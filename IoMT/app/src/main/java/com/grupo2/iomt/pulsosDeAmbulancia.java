@@ -226,11 +226,13 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
         for(int i = 0; i<arrayRegistroPulsos.size(); i++){
             for(int j = 0; j < arrayTipoPulso.size(); j++) {
                 //idPulso = arrayTipoPulso.get(i).getId();
-                System.out.println(arrayRegistroPulsos.get(i).getFecha() + "\n\n\n");
+               // System.out.println(arrayRegistroPulsos.get(i).getFecha() + "\n\n\n");
                 if (arrayTipoPulso.get(j).getId() == arrayRegistroPulsos.get(i).getId_pulso()) {
 
-                    arrayListPulsos.add(new visualizarPulsoApp(arrayRegistroPulsos.get(i).getId(), arrayRegistroPulsos.get(i).getFecha(), arrayRegistroPulsos.get(i).getHora(), arrayTipoPulso.get(i).getNombre(), arrayRegistroPulsos.get(i).getId_ambulancia()));
+                    arrayListPulsos.add(new visualizarPulsoApp(arrayTipoPulso.get(j).getNombre(), arrayRegistroPulsos.get(i).getFecha(), arrayRegistroPulsos.get(i).getHora(), arrayTipoPulso.get(j).getDescripcion(), arrayTipoPulso.get(j).getNumPulsos()));
+                    System.out.println(arrayListPulsos.size());
                 }
+
             }
         }
         adapterPulsos.notifyDataSetChanged();
