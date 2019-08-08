@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.grupo2.iomt.entity.Token;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,9 +35,13 @@ import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnLogin, btnRegistrarse;
-
+    private EditText user,pass;
     private RequestQueue mQueue=null;
     private String token=null;
+    SharedPreferences sharedPreferences;
+
+    DB db;
+    TokenDao tokenDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +53,31 @@ public class MainActivity extends AppCompatActivity {
 
         mQueue= Volley.newRequestQueue(this);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnRegistrarse = (Button) findViewById(R.id.btnRegistrarse);
 
+        user = (EditText) findViewById(R.id.txtUser);
+        pass = (EditText) findViewById(R.id.txtPasswd);
+        cargarCredenciales();
 
-        /* Ejemplo para usar base de datos
+        sharedPreferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
 
-        DB db = instanceDB("mainDB");
-        TokenDao a = db.getTokenDAO();
-        Token aaa =  new Token("ahj");
-        a.insert(aaa);
-        a.getItems();
+        db = instanceDB("mainDB");
+        tokenDAO = db.getTokenDAO();
 
-        */
+        Token token = getTokenSesion();
+        if(token != null){
+            Intent i = new Intent(getBaseContext(), Menu.class);
+            i.putExtra("token", token.getToken_string());
+            startActivity(i);
+        }
+
+    }
+    public Token getTokenSesion(){
+        ArrayList<Token> tokens = (ArrayList<Token>) tokenDAO.getItems();
+        System.out.println("token size" + String.valueOf(tokens.size()));
+        if(tokens.size() > 0)
+            return tokens.get(0);
+        else
+            return null;
     }
 
     public void IniciarSesion(View view){
@@ -65,12 +85,24 @@ public class MainActivity extends AppCompatActivity {
         final EditText dt2=(EditText) findViewById(R.id.txtPasswd);
         String usuario=dt1.getText().toString();
         String contrasena=dt2.getText().toString();
-        if(CheckInternet.errorConexion()){
+        if(false){
             Toast.makeText(this, "No hay conexion a Internet", Toast.LENGTH_LONG).show();
         }
         else{
             iniciarSesion(usuario,contrasena);
         }
+
+    }
+
+    private void cargarCredenciales() {
+
+        SharedPreferences preferences = getSharedPreferences("Credenciales", Context.MODE_PRIVATE);
+
+        String use = preferences.getString("User","");
+        String passwd = preferences.getString("Passwd","");
+
+        user.setText(use);
+        pass.setText(passwd);
 
     }
 
@@ -88,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(response);
                 try {
                     token = response.getString("token");
+                    Token tokenTosave =  new Token(token);
+                    tokenDAO.insert(tokenTosave);
+
                     Intent i = new Intent(getBaseContext(), Menu.class);
                     i.putExtra("token", token);
                     startActivity(i);

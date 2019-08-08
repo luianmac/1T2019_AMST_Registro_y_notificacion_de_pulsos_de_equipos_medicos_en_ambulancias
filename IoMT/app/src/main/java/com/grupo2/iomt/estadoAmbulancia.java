@@ -82,8 +82,8 @@ public class estadoAmbulancia extends AppCompatActivity {
     }
 
     /*Método que permite la conexión a la base de datos y capturar los datos
-    *los cuales son almacenados en un array para presentarlos mediante un ListView
-    */
+     *los cuales son almacenados en un array para presentarlos mediante un ListView
+     */
     private void actualizar(){
 
         String url_temp = "https://amstdb.herokuapp.com/db/ambulancia";

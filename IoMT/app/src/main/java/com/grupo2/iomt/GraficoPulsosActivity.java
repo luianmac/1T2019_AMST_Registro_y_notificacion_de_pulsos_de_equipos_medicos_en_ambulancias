@@ -61,6 +61,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
     Map<String, String> params;
     Map<String, String> prioridades;
     Map<String, String> codseñales;
+    boolean banderaActualizando = false;
+
+    Handler handler;
+    Runnable runnable;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +85,13 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         pulsos = new ArrayList<>();
 
         prioridades = new HashMap<>();
-        prioridades.put("Desconocida", "Baja");
+        prioridades.put("Señal desconocida", "Baja");
         prioridades.put("Hiperpirexia", "Alta");
-        prioridades.put("Presion Arterial Baja", "Medio");
+        prioridades.put("Presion arterial baja", "Medio");
         prioridades.put("Arritmia", "Baja");
-        prioridades.put("Paro Cardiaco", "Alta");
-        prioridades.put("Presion Arterial Alta", "Medio");
+        prioridades.put("Paro cardiaco", "Alta");
+        prioridades.put("Presion arterial alta", "Medio");
+        prioridades.put("Sin señal", "Baja");
 
         codseñales = new HashMap<>();
             codseñales.put("SED", "Desconocida");
@@ -96,7 +101,34 @@ public class GraficoPulsosActivity extends AppCompatActivity {
             codseñales.put("PCA", "Paro Cardiaco");
             codseñales.put("PAA", "Presion Arterial Alta");
 
+       handler = new Handler();
+       runnable = new Runnable() {
+           @Override
+           public void run() {
+               banderaActualizando = true;
+               registroPulsos = new ArrayList<>();
+               ambulancias = new ArrayList<>();
+               pulsos = new ArrayList<>();
 
+               actualizar();
+               banderaActualizando = false;
+               handler.postDelayed(this, 10000);
+           }
+       };
+       runnable.run();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacks(runnable);
+
+        super.onBackPressed();
+
+    }
+
+    public void actualizar(){
+        System.out.println("Acccccccccc");
 
         obtenerRegistros();
         obtenerAmbulancias();
@@ -105,20 +137,24 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                addAmbulaciaAndPulso(registroPulsos);
+
+
+
                 ((TextView) findViewById(R.id.title_Table)).setVisibility(View.VISIBLE);
-                crearTablaRegistros(registroPulsos);
+                addAmbulaciaAndPulso(registroPulsos);
                 Map<String, Integer> data = contarPulsos(registroPulsos);
                 setDataBarchart(barChart, data);
                 init_Barchart(barChart);
                 barChart.notifyDataSetChanged();
                 barChart.invalidate();
+                table.removeAllViews();
+
+                crearTablaRegistros(registroPulsos);
                 //init_values_Barchart(barChart);
-
-
             }
         }, 2000);
     }
+
     public void setDataBarchart(BarChart barChart, Map<String, Integer> map){
             String[] labels = new String[map.keySet().size()];
             ArrayList<BarEntry> barEntries = new ArrayList<>();
@@ -158,6 +194,7 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1);
         xAxis.setCenterAxisLabels(true);
+        xAxis.setLabelRotationAngle(45);
 
     }
     public void init_Barchart(BarChart barChart){
@@ -300,16 +337,20 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
     public void addRow(final TableLayout table, String[] cells, final int id){
         TableRow row = new TableRow(getApplicationContext());
-        row.setGravity(Gravity.CENTER);
+        row.setLayoutParams(table.getLayoutParams());
+        row.setGravity(Gravity.CENTER_HORIZONTAL);
         row.setPadding(0,0,0,20);
         if(id >= 0) {
             row.setClickable(true);
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    RegistroPulso registroPulso = registroPulsos.get(id);
-                    System.out.println(registroPulso.hora);
-                    showInfo(id);
+                    try {
+                        RegistroPulso registroPulso = registroPulsos.get(id);
+                        System.out.println(registroPulso.hora);
+                        showInfo(id);
+                    }catch (Exception e){}
+
                 }
             });
         }
@@ -319,7 +360,8 @@ public class GraficoPulsosActivity extends AppCompatActivity {
             textView.setGravity(Gravity.CENTER);
             textView.setText(value);
             textView.setTextColor(Color.BLACK);
-            textView.setPaddingRelative(90,0,90,0);
+            textView.setPaddingRelative(5,0,5,0);
+            //textView.setLayoutParams(row.getLayoutParams());
             row.addView(textView);
         }
         table.addView(row);
@@ -366,40 +408,42 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
     }
     public void showInfo(int id){
-        RegistroPulso registroPulso = registroPulsos.get(id);
-        View popup = getLayoutInflater().inflate(R.layout.dialog_info_registo_pulso, null);
-        TextView title = (TextView) popup.findViewById(R.id.textView_Title);
-        TextView prioridad = (TextView) popup.findViewById(R.id.textView_Prioridad);
-        TextView date = (TextView) popup.findViewById(R.id.textView_Date);
-        TextView ambulancia = (TextView) popup.findViewById(R.id.textView_Ambulancia);
-        TextView placa = (TextView) popup.findViewById(R.id.textView_Placa);
-        TextView conductor = (TextView) popup.findViewById(R.id.textView_Conductor);
-        Button okButton = (Button) popup.findViewById(R.id.button_Ok);
 
-        title.setText(registroPulso.pulso.nombre);
+            RegistroPulso registroPulso = registroPulsos.get(id);
+            View popup = getLayoutInflater().inflate(R.layout.dialog_info_registo_pulso, null);
+            TextView title = (TextView) popup.findViewById(R.id.textView_Title);
+            TextView prioridad = (TextView) popup.findViewById(R.id.textView_Prioridad);
+            TextView date = (TextView) popup.findViewById(R.id.textView_Date);
+            TextView ambulancia = (TextView) popup.findViewById(R.id.textView_Ambulancia);
+            TextView placa = (TextView) popup.findViewById(R.id.textView_Placa);
+            TextView conductor = (TextView) popup.findViewById(R.id.textView_Conductor);
+            Button okButton = (Button) popup.findViewById(R.id.button_Ok);
 
-        date.setText("Señal obtenidad el " + registroPulso.fecah + " a la " + registroPulso.hora);
-        ambulancia.setText("Ambulancia: " + String.valueOf(registroPulso.ambulanciaID));
-        placa.setText("Placa: " + registroPulso.ambulancia.placa);
-        conductor.setText("Conductor: " + String.valueOf(registroPulso.ambulancia.conductor));
-        try{
-            prioridad.setText("Prioridad " + prioridades.get(registroPulso.pulso.nombre));
-        }
-        catch (Exception e){
-            prioridad.setText("Prioridad " + "Baja");
-        }
+            title.setText(registroPulso.pulso.nombre);
 
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(GraficoPulsosActivity.this);
-        mBuilder.setView(popup);
-        final AlertDialog dialog = mBuilder.create();
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+            date.setText("Señal obtenidad el " + registroPulso.fecah + " a la " + registroPulso.hora);
+            ambulancia.setText("Ambulancia: " + String.valueOf(registroPulso.ambulanciaID));
+            placa.setText("Placa: " + registroPulso.ambulancia.placa);
+            conductor.setText("Conductor: " + String.valueOf(registroPulso.ambulancia.conductor));
+            try {
+                System.out.println(registroPulso.pulso.nombre);
+                prioridad.setText("Prioridad " + prioridades.get(registroPulso.pulso.nombre));
+            } catch (Exception e) {
+                prioridad.setText("Prioridad " + "Baja");
             }
-        });
 
-        dialog.show();
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(GraficoPulsosActivity.this);
+            mBuilder.setView(popup);
+            final AlertDialog dialog = mBuilder.create();
+            okButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
 
     }
 
