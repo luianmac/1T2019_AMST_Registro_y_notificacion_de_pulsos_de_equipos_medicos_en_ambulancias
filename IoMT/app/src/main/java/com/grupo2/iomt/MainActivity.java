@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         mQueue= Volley.newRequestQueue(this);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnRegistrarse = (Button) findViewById(R.id.btnRegistrarse);
+
         user = (EditText) findViewById(R.id.txtUser);
         pass = (EditText) findViewById(R.id.txtPasswd);
         cargarCredenciales();

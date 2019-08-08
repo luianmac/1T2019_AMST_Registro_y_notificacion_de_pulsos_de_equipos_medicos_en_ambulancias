@@ -4,43 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_launcher_background"
     tools:context=".Menu">
 
     <LinearLayout
         android:layout_width="395dp"
         android:layout_height="340dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewMenu"
             android:layout_width="match_parent"
             android:layout_height="179dp"
+            android:fontFamily="@font/architects_daughter"
             android:gravity="center"
             android:text="Menu Principal"
-            android:textSize="36sp" />
+            android:textSize="50sp" />
 
         <Button
             android:id="@+id/btnBateria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estado de la ambulancia"
-            android:onClick="irEstadoAmbulancia"/>
+            android:fontFamily="@font/architects_daughter"
+            android:onClick="irEstadoAmbulancia"
+            android:text="Estado de la ambulancia" />
 
         <Button
             android:id="@+id/buttonBarChart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Grafico de pulsos"
-            android:onClick="irGraficoPulsos"/>
+            android:fontFamily="@font/architects_daughter"
+            android:onClick="irGraficoPulsos"
+            android:text="Grafico de pulsos" />
 
         <Button
             android:id="@+id/btnSalir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salir"
-            android:onClick="salir"/>
+            android:fontFamily="@font/architects_daughter"
+            android:onClick="salir"
+            android:text="Salir" />
 
     </LinearLayout>
 
