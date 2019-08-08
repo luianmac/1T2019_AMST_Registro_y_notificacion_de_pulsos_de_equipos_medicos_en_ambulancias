@@ -37,11 +37,11 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
     String token = "";
     int idPrueba = 4;
     private ListView listPulsos;
-     ArrayAdapter<visualizarPulsoApp> adapterPulsos;
-     ArrayList<visualizarPulsoApp> arrayListPulsos = new ArrayList<>();
-     ArrayList<registroPulsos> arrayRegistroPulsos = new ArrayList<>();
-     ArrayList<tipoDePulso> arrayTipoPulso =  new ArrayList<>();
-     RequestQueue mQueue;
+    ArrayAdapter<visualizarPulsoApp> adapterPulsos;
+    ArrayList<visualizarPulsoApp> arrayListPulsos = new ArrayList<>();
+    ArrayList<registroPulsos> arrayRegistroPulsos = new ArrayList<>();
+    ArrayList<tipoDePulso> arrayTipoPulso =  new ArrayList<>();
+    RequestQueue mQueue;
     private int id = 0;
     int socketTimeout = 3000;
 
@@ -108,8 +108,8 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
         }
     }
     /*  Método que permite la conexión a la base de datos y se captura todos los atributos
-    *   validando con el id de ambulancia que se obtiene de la anterior actividad.
-    */
+     *   validando con el id de ambulancia que se obtiene de la anterior actividad.
+     */
     private void obtenerPulso() {
 
         String url_temp = "https://amstdb.herokuapp.com/db/registroDePulsos";
@@ -132,8 +132,8 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
                                 String fecha = cadenaSplit[0];
                                 String hora = cadenaSplit[1].split("\\.")[0];
 
-                                    arrayRegistroPulsos.add(new registroPulsos(j.getInt("id"), fecha, hora, j.getInt("pulso"), j.getInt("ambulancia")));
-                                    id = j.getInt("pulso");
+                                arrayRegistroPulsos.add(new registroPulsos(j.getInt("id"), fecha, hora, j.getInt("pulso"), j.getInt("ambulancia")));
+                                id = j.getInt("pulso");
                                 System.out.println(arrayRegistroPulsos.size()+"\n\n\n\n");
                                 //}
 
@@ -187,8 +187,8 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
                                 JSONObject j = (JSONObject) response.get(i);
                                 //linea = linea +""+j.getString("id")+", "+j.getString("camion")+", "+j.getString("origen")+", "+j.getString("destino")+"\n\n";
                                 //if(j.getInt("ambulancia") == idAmbulancia){
-                                    arrayTipoPulso.add(new tipoDePulso(j.getInt("id"), j.getString("nombre"), j.getInt("numero_pulsos"), j.getString("descripcion")));
-                                    //i = j.getInt("id");
+                                arrayTipoPulso.add(new tipoDePulso(j.getInt("id"), j.getString("nombre"), j.getInt("numero_pulsos"), j.getString("descripcion")));
+                                //i = j.getInt("id");
                                 System.out.println(arrayTipoPulso.size()+"\n\n\n");
                                 //}
 
@@ -226,7 +226,7 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
         for(int i = 0; i<arrayRegistroPulsos.size(); i++){
             for(int j = 0; j < arrayTipoPulso.size(); j++) {
                 //idPulso = arrayTipoPulso.get(i).getId();
-               // System.out.println(arrayRegistroPulsos.get(i).getFecha() + "\n\n\n");
+                // System.out.println(arrayRegistroPulsos.get(i).getFecha() + "\n\n\n");
                 if (arrayTipoPulso.get(j).getId() == arrayRegistroPulsos.get(i).getId_pulso()) {
 
                     arrayListPulsos.add(new visualizarPulsoApp(arrayTipoPulso.get(j).getNombre(), arrayRegistroPulsos.get(i).getFecha(), arrayRegistroPulsos.get(i).getHora(), arrayTipoPulso.get(j).getDescripcion(), arrayTipoPulso.get(j).getNumPulsos()));

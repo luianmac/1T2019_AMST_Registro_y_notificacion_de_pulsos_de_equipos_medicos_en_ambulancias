@@ -50,6 +50,7 @@
                             android:layout_height="wrap_content"
                             android:divider="?android:attr/dividerHorizontal"
                             android:showDividers="middle"
+                            android:layout_gravity="center_horizontal"
                             android:stretchColumns="*" />
                     </HorizontalScrollView>
                 </ScrollView>
