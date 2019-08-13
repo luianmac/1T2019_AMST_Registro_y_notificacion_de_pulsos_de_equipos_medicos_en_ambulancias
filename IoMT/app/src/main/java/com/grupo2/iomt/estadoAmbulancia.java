@@ -39,11 +39,17 @@ public class estadoAmbulancia extends AppCompatActivity {
     //Declaración de variables a usar
     private Button btn;
     private ListView list;
-    private ArrayAdapter<Ambulancia> adapter;
+    //private ArrayAdapter<Ambulancia> adapter;
     private ArrayList<Ambulancia> arrayList;
     private RequestQueue mQueue;
     private String token = "";
 
+    private ArrayList <String> ambulaciaNums;
+    private ArrayList <String> ambulaciaPlacas;
+    private ArrayList <Boolean> ambulaciaOcupadas;
+    private ArrayList <String> ambulaciaNumConductores;
+    private ArrayList<Integer> ambulaciaImagenes;
+    private Ambulacia_listAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,23 +61,20 @@ public class estadoAmbulancia extends AppCompatActivity {
         btn = (Button) findViewById(R.id.button);
         list = (ListView) findViewById(R.id.listView);
 
-        arrayList = new ArrayList<Ambulancia>();
+        ambulaciaNums = new ArrayList<>();
+        ambulaciaPlacas = new ArrayList<>();
+        ambulaciaOcupadas = new ArrayList<>();
+        ambulaciaNumConductores = new ArrayList<>();
 
-        adapter = new ArrayAdapter<Ambulancia>(getApplicationContext(), R.layout.custom_layout, arrayList);
+        ambulaciaImagenes = new ArrayList<>();
+
+        adapter = new Ambulacia_listAdapter(this, ambulaciaNums, ambulaciaPlacas, ambulaciaOcupadas, ambulaciaNumConductores,ambulaciaImagenes, token);
+        list=(ListView)findViewById(R.id.listView);
+        list.setClickable(true);
         list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "este es " + list.getItemAtPosition(position), Toast.LENGTH_LONG).show();
-                Intent pulsos = new Intent(getBaseContext(),pulsosDeAmbulancia.class);
-                //System.out.println("ESSSSTOOOOO             " + position);
-                pulsos.putExtra("idAmbulancia", position);
-                pulsos.putExtra("token", token);
-                startActivity(pulsos);
 
-            }
-        });
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +96,33 @@ public class estadoAmbulancia extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            arrayList.clear();
+                            ambulaciaNums.clear();
+                            ambulaciaImagenes.clear();
+                            ambulaciaOcupadas.clear();
+                            ambulaciaPlacas.clear();
+                            ambulaciaNumConductores.clear();
+
                             System.out.println("PRUEBA:" +response.toString());
                             for(int i = 0; i<response.length(); i++){
                                 JSONObject j = (JSONObject) response.get(i);
-                                arrayList.add(new Ambulancia(j.getInt("id"), j.getString("placa"), j.getBoolean("ocupado"), j.getInt("conductor")));
+                                String placa = j.getString("placa");
+                                String numeroAmbulacia = String.valueOf(j.getInt("id"));
+                                Boolean ocupado = j.getBoolean("ocupado");
+                                String numConductor = String.valueOf(j.getInt("conductor"));
+
+                                ambulaciaNums.add(numeroAmbulacia);
+                                ambulaciaPlacas.add(placa);
+                                ambulaciaOcupadas.add(ocupado);
+                                ambulaciaNumConductores.add(numConductor);
+                                ambulaciaImagenes.add(R.drawable.ambulancia);
+
+
+                                adapter.notifyDataSetChanged();
+
+                                //arrayList.add(new Ambulancia(j.getInt("id"), j.getString("placa"), j.getBoolean("ocupado"), j.getInt("conductor")));
                             }
                         } catch (Exception e) {
+                            System.out.println("errooooorrrrrrr");
                             e.printStackTrace();
                         }
                     }
@@ -119,6 +142,5 @@ public class estadoAmbulancia extends AppCompatActivity {
             }
         };;
         mQueue.add(request);
-        adapter.notifyDataSetChanged();
     }
 }
