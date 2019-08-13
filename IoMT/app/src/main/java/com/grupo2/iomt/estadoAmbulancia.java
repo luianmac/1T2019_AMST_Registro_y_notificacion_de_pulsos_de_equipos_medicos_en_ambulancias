@@ -118,7 +118,7 @@ public class estadoAmbulancia extends AppCompatActivity {
 
 
                                 adapter.notifyDataSetChanged();
-                                
+
                                 //arrayList.add(new Ambulancia(j.getInt("id"), j.getString("placa"), j.getBoolean("ocupado"), j.getInt("conductor")));
                             }
                         } catch (Exception e) {

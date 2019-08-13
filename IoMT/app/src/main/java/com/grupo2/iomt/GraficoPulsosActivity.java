@@ -87,10 +87,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         prioridades = new HashMap<>();
         prioridades.put("Señal desconocida", "Baja");
         prioridades.put("Hiperpirexia", "Alta");
-        prioridades.put("Presion arterial baja", "Medio");
+        prioridades.put("Presion arterial baja", "Media");
         prioridades.put("Arritmia", "Baja");
         prioridades.put("Paro cardiaco", "Alta");
-        prioridades.put("Presion arterial alta", "Medio");
+        prioridades.put("Presion arterial alta", "Media");
         prioridades.put("Sin señal", "Baja");
 
         codseñales = new HashMap<>();

@@ -44,8 +44,8 @@ String token;
             View rowView = inflater.inflate(R.layout.ambulacia_list, null, true);
 
             TextView titleText = (TextView) rowView.findViewById(R.id.title);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-            TextView placaText = (TextView) rowView.findViewById(R.id.Placa);
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon_prioridad);
+            TextView placaText = (TextView) rowView.findViewById(R.id.textView_descipcion);
             TextView conductorText = (TextView) rowView.findViewById(R.id.Conductor);
             RadioButton ocupadoBoton = (RadioButton) rowView.findViewById(R.id.radioButton_estado);
 
