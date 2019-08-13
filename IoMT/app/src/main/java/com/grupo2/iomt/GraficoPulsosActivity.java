@@ -105,13 +105,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
        runnable = new Runnable() {
            @Override
            public void run() {
-               banderaActualizando = true;
                registroPulsos = new ArrayList<>();
                ambulancias = new ArrayList<>();
                pulsos = new ArrayList<>();
-
                actualizar();
-               banderaActualizando = false;
                handler.postDelayed(this, 10000);
            }
        };
@@ -129,17 +126,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
     public void actualizar(){
         System.out.println("Acccccccccc");
-
         obtenerRegistros();
         obtenerAmbulancias();
         obtenerPulsos();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
-
                 ((TextView) findViewById(R.id.title_Table)).setVisibility(View.VISIBLE);
                 addAmbulaciaAndPulso(registroPulsos);
                 Map<String, Integer> data = contarPulsos(registroPulsos);
