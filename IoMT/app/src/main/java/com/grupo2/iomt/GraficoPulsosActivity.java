@@ -87,10 +87,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         prioridades = new HashMap<>();
         prioridades.put("Señal desconocida", "Baja");
         prioridades.put("Hiperpirexia", "Alta");
-        prioridades.put("Presion arterial baja", "Medio");
+        prioridades.put("Presion arterial baja", "Media");
         prioridades.put("Arritmia", "Baja");
         prioridades.put("Paro cardiaco", "Alta");
-        prioridades.put("Presion arterial alta", "Medio");
+        prioridades.put("Presion arterial alta", "Media");
         prioridades.put("Sin señal", "Baja");
 
         codseñales = new HashMap<>();
@@ -105,13 +105,10 @@ public class GraficoPulsosActivity extends AppCompatActivity {
        runnable = new Runnable() {
            @Override
            public void run() {
-               banderaActualizando = true;
                registroPulsos = new ArrayList<>();
                ambulancias = new ArrayList<>();
                pulsos = new ArrayList<>();
-
                actualizar();
-               banderaActualizando = false;
                handler.postDelayed(this, 10000);
            }
        };
@@ -129,17 +126,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
     public void actualizar(){
         System.out.println("Acccccccccc");
-
         obtenerRegistros();
         obtenerAmbulancias();
         obtenerPulsos();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
-
                 ((TextView) findViewById(R.id.title_Table)).setVisibility(View.VISIBLE);
                 addAmbulaciaAndPulso(registroPulsos);
                 Map<String, Integer> data = contarPulsos(registroPulsos);

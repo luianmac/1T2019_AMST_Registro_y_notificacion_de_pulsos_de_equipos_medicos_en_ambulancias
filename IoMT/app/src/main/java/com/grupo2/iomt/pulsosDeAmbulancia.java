@@ -43,7 +43,16 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
     ArrayList<tipoDePulso> arrayTipoPulso =  new ArrayList<>();
     RequestQueue mQueue;
     private int id = 0;
+    Tiempo tiempo;
     int socketTimeout = 3000;
+
+    ArrayList<String> tiposPulsos;
+    ArrayList <String> fechas;
+    ArrayList <String> descripciones;
+    ArrayList<Integer> prioridadesImagenes;
+    Map<String, String> prioridades;
+    private Ambulancia_pulsos_listAdapter adapter;
+    ListView list;
 
     public pulsosDeAmbulancia() {
     }
@@ -56,15 +65,34 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
         this.idAmbulancia = (Integer) ambulancia.getExtras().get("idAmbulancia");
         this.token = (String) ambulancia.getExtras().get("token");
         mQueue = Volley.newRequestQueue(this);
-        listPulsos = (ListView) findViewById(R.id.listViewPulsos);
+        //listPulsos = (ListView) findViewById(R.id.listViewPulsos);
 
         arrayListPulsos = new ArrayList<visualizarPulsoApp>();
-        adapterPulsos = new ArrayAdapter<visualizarPulsoApp>(getApplicationContext(), R.layout.custom_layout, arrayListPulsos);
+        //adapterPulsos = new ArrayAdapter<visualizarPulsoApp>(getApplicationContext(), R.layout.custom_layout, arrayListPulsos);
 
-        listPulsos.setAdapter(adapterPulsos);
+        //listPulsos.setAdapter(adapterPulsos);
 
         Tiempo tiempo = new Tiempo();
         tiempo.execute();
+
+        tiposPulsos = new ArrayList<>();
+        fechas = new ArrayList<>();
+        descripciones = new ArrayList<>();
+        prioridadesImagenes = new ArrayList<>();
+
+        prioridades = new HashMap<>();
+        prioridades.put("Señal desconocida", "Baja");
+        prioridades.put("Hiperpirexia", "Alta");
+        prioridades.put("Presion arterial baja", "Media");
+        prioridades.put("Arritmia", "Baja");
+        prioridades.put("Paro cardiaco", "Alta");
+        prioridades.put("Presion arterial alta", "Media");
+        prioridades.put("Sin señal", "Baja");
+
+        adapter = new Ambulancia_pulsos_listAdapter(this, tiposPulsos,fechas,descripciones,prioridadesImagenes);
+        list=(ListView)findViewById(R.id.listViewPulsos);
+        list.setClickable(true);
+        list.setAdapter(adapter);
 
 
     }
@@ -78,9 +106,11 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
     }
 
     public void ejecutar(){
-        Tiempo tiempo = new Tiempo();
+        tiempo = new Tiempo();
         tiempo.execute();
+
     }
+
 
     //Clase para ser ejecutada en segundo plano
     public class Tiempo extends AsyncTask<Void,Integer,Boolean>{
@@ -104,7 +134,7 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
 
                     mostrarActivity();
                 }
-            },  2000);
+            },  10000);
         }
     }
     /*  Método que permite la conexión a la base de datos y se captura todos los atributos
@@ -235,6 +265,44 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
 
             }
         }
-        adapterPulsos.notifyDataSetChanged();
+        crearLista();
+        //adapterPulsos.notifyDataSetChanged();
+    }
+
+    private void crearLista(){
+        tiposPulsos.clear();
+        fechas.clear();
+        descripciones.clear();
+        prioridadesImagenes.clear();
+
+        for (int i = 0; i<arrayListPulsos.size(); i++ ){
+            visualizarPulsoApp v = arrayListPulsos.get(i);
+            tiposPulsos.add(v.getNombrePulso());
+            fechas.add(v.getFecha());
+            descripciones.add(v.getDescripcion());
+            String nombrePulso = v.getNombrePulso();
+            String prioridad;
+            try {
+                prioridad = prioridades.get(nombrePulso);
+            }catch (Exception e){
+                prioridad = "Desconocida";
+            }
+            if (prioridad.equals("Baja") || prioridad.equals("Desconocida") ){
+                prioridadesImagenes.add(R.drawable.prioridad_baja);
+            }
+            else if (prioridad.equals("Media")){
+                prioridadesImagenes.add(R.drawable.prioridad_media);
+            }
+            else{
+                prioridadesImagenes.add(R.drawable.prioridad_alta);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        tiempo.cancel(true);
     }
 }
