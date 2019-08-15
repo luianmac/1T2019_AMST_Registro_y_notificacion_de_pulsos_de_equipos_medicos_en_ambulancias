@@ -72,8 +72,6 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
 
         //listPulsos.setAdapter(adapterPulsos);
 
-        Tiempo tiempo = new Tiempo();
-        tiempo.execute();
 
         tiposPulsos = new ArrayList<>();
         fechas = new ArrayList<>();
@@ -93,6 +91,12 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
         list=(ListView)findViewById(R.id.listViewPulsos);
         list.setClickable(true);
         list.setAdapter(adapter);
+
+        
+
+        Tiempo tiempo = new Tiempo();
+        tiempo.execute();
+
 
 
     }
@@ -134,7 +138,7 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
 
                     mostrarActivity();
                 }
-            },  10000);
+            },  3000);
         }
     }
     /*  Método que permite la conexión a la base de datos y se captura todos los atributos
