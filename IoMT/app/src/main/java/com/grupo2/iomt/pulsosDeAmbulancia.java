@@ -92,7 +92,7 @@ public class pulsosDeAmbulancia extends AppCompatActivity {
         list.setClickable(true);
         list.setAdapter(adapter);
 
-        
+
 
         Tiempo tiempo = new Tiempo();
         tiempo.execute();

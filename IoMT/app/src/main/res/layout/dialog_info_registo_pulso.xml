@@ -57,7 +57,8 @@
         android:id="@+id/button_Ok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2A86B6E0"
+        android:background="#00B8FF"
+        android:textColor="#FFFFFF"
         android:shadowColor="#E42E646B"
         android:text="OK"
         android:textStyle="bold" />
