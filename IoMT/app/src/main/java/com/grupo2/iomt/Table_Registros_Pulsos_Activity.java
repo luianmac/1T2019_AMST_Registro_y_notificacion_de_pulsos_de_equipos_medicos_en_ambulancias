@@ -2,24 +2,13 @@ package com.grupo2.iomt;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.core.app.ActivityCompat;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,14 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,11 +27,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-public class GraficoPulsosActivity extends AppCompatActivity {
-    BarChart barChart;
+public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
     String token;
     String urlRegistoPulsos = "https://amstdb.herokuapp.com/db/registroDePulsos";
     String urlAmbulancia = "https://amstdb.herokuapp.com/db/ambulancia";
@@ -63,15 +42,14 @@ public class GraficoPulsosActivity extends AppCompatActivity {
     Map<String, String> params;
     Map<String, String> prioridades;
     Map<String, String> codseñales;
-    boolean banderaActualizando = false;
-
     Handler handler;
     Runnable runnable;
 
-        @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grafico_pulsos);
+        setContentView(R.layout.activity_table__registros__pulsos_);
 
         token = getIntent().getExtras().getString("token");
         queue = Volley.newRequestQueue(this);
@@ -79,12 +57,11 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         params = new HashMap<String, String>();
         params.put("Authorization", "JWT " + token);
 
-        barChart = (BarChart)findViewById(R.id.barchart);
-        table = (TableLayout) findViewById(R.id.table1);
-
         registroPulsos = new ArrayList<>();
         ambulancias = new ArrayList<>();
         pulsos = new ArrayList<>();
+
+        table = (TableLayout) findViewById(R.id.table1);
 
         prioridades = new HashMap<>();
         prioridades.put("Señal desconocida", "Baja");
@@ -103,21 +80,18 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         codseñales.put("PCA", "Paro Cardiaco");
         codseñales.put("PAA", "Presion Arterial Alta");
 
-        init_Barchart(barChart);
-
-            handler = new Handler();
-       runnable = new Runnable() {
-           @Override
-           public void run() {
-               registroPulsos = new ArrayList<>();
-               ambulancias = new ArrayList<>();
-               pulsos = new ArrayList<>();
-               actualizar();
-               handler.postDelayed(this, 10000);
-           }
-       };
-       runnable.run();
-
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                registroPulsos = new ArrayList<>();
+                ambulancias = new ArrayList<>();
+                pulsos = new ArrayList<>();
+                actualizar();
+                handler.postDelayed(this, 10000);
+            }
+        };
+        runnable.run();
     }
 
     @Override
@@ -126,12 +100,6 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
         super.onBackPressed();
 
-    }
-    public void irDetalles(View v){
-        handler.removeCallbacks(runnable);
-        Intent intent = new Intent(getApplicationContext(), Table_Registros_Pulsos_Activity.class);
-        intent.putExtra("token", token);
-        startActivity(intent);
     }
 
     public void actualizar(){
@@ -142,72 +110,15 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                ((TextView) findViewById(R.id.title_Table)).setVisibility(View.VISIBLE);
                 addAmbulaciaAndPulso(registroPulsos);
-                Map<String, Integer> data = contarPulsos(registroPulsos);
-                setDataBarchart(barChart, data);
-                barChart.notifyDataSetChanged();
-                barChart.invalidate();
-                findViewById(R.id.btnDetalles).setVisibility(View.VISIBLE);
 
+                table.removeAllViews();
+
+                crearTablaRegistros(registroPulsos);
+                //init_values_Barchart(barChart);
             }
         }, 2000);
-    }
-
-    public void setDataBarchart(BarChart barChart, Map<String, Integer> map){
-            String[] labels = new String[map.keySet().size()];
-            ArrayList<BarEntry> barEntries = new ArrayList<>();
-
-            int maxValue = 0;
-            Iterator <Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-            int counter = 0;
-            while (iterator.hasNext()){
-                Map.Entry<String, Integer> i = iterator.next();
-                String key = i.getKey();
-                Integer value = i.getValue();
-                barEntries.add(new BarEntry(counter, value));
-
-                labels[counter] = key;
-                counter ++;
-                if (value > maxValue)
-                    maxValue = value;
-            }
-            BarDataSet barDataSet = new BarDataSet(barEntries, "Pulsos");
-            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-
-            BarData barData = new BarData(barDataSet);
-            //barData.setBarWidth(0.9f);
-
-            barChart.setData(barData);
-            add_labels_Barchart(barChart, labels);
-
-    }
-
-    public void add_labels_Barchart(BarChart barChart, String[] labels){
-        IndexAxisValueFormatter indexFormatter = new IndexAxisValueFormatter();
-        indexFormatter.setValues(labels);
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setValueFormatter(indexFormatter);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1);
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setLabelRotationAngle(45);
-        xAxis.setAvoidFirstLastClipping(true);
-        xAxis.setGranularityEnabled(true);
-
-        xAxis.setXOffset(-20);
-
-    }
-    public void init_Barchart(BarChart barChart){
-        barChart.setDrawBarShadow(false);
-        barChart.setDrawValueAboveBar(false);
-        //barChart.setMaxVisibleValueCount(50);
-        barChart.setPinchZoom(false);
-        barChart.setDrawGridBackground(true);
-        barChart.getLegend().setEnabled(false);
-        barChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-
     }
 
     public void obtenerRegistros(){
@@ -322,31 +233,48 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    public Map<String, Integer> contarPulsos(ArrayList<RegistroPulso> registroPulsos){
-        Map<String, Integer> contador = new HashMap<>();
-        for (int i = 0; i<registroPulsos.size(); i++){
-            RegistroPulso registroPulso = registroPulsos.get(i);
-            Pulso pulso = registroPulso.getPulso();
-            String nombre = pulso.nombre;
-            try{
-                Integer value = contador.get(nombre) + 1;
-                //contador.remove(nombre);
-                contador.put(nombre,value);
-            }
-            catch (Exception e){
-                contador.put(nombre,1);
-            }
+    public void addRow(final TableLayout table, String[] cells, final int id){
+        TableRow row = new TableRow(getApplicationContext());
+        row.setLayoutParams(table.getLayoutParams());
+        row.setGravity(Gravity.CENTER_HORIZONTAL);
+        row.setPadding(0,0,0,20);
+
+        //row.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
+        if(id >= 0) {
+            row.setClickable(true);
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        RegistroPulso registroPulso = registroPulsos.get(id);
+                        System.out.println(registroPulso.hora);
+                        showInfo(id);
+                    }catch (Exception e){}
+
+                }
+            });
         }
-        return contador;
+        for (int i = 0; i< cells.length; i++){
+            String value = cells[i];
+            TextView textView = new TextView(getApplicationContext());
+            textView.setGravity(Gravity.CENTER);
+            textView.setText(value);
+            textView.setTextColor(Color.BLACK);
+            //textView.setCompoundDrawablePadding(10);
+            textView.setPaddingRelative(10,0,10,0);
+            //textView.setLayoutParams(table.getLayoutParams());
+            row.addView(textView);
+        }
+        table.addView(row);
     }
 
     public Ambulancia getAmbulancia(ArrayList<Ambulancia> array, int id ){
-            for (int i = 0; i<array.size(); i++){
-                Ambulancia ambulancia= array.get(i);
-                if(ambulancia.id == id)
-                    return ambulancia;
-            }
-            return new Ambulancia();
+        for (int i = 0; i<array.size(); i++){
+            Ambulancia ambulancia= array.get(i);
+            if(ambulancia.id == id)
+                return ambulancia;
+        }
+        return new Ambulancia();
     }
     public Pulso getPulso (ArrayList<Pulso> array, int id ){
         for (int i = 0; i<array.size(); i++){
@@ -358,14 +286,66 @@ public class GraficoPulsosActivity extends AppCompatActivity {
     }
 
     public void addAmbulaciaAndPulso(ArrayList<RegistroPulso> registroPulsos){
-            for (int i = 0; i <registroPulsos.size(); i++){
-                RegistroPulso registroPulso = registroPulsos.get(i);
-                Pulso pulso =  getPulso(pulsos, registroPulso.pulsoID);
-                Ambulancia ambulancia = getAmbulancia(ambulancias, registroPulso.ambulanciaID);
-                registroPulso.setPulso(pulso);
-                registroPulso.setAmbulancia(ambulancia);
-            }
+        for (int i = 0; i <registroPulsos.size(); i++){
+            RegistroPulso registroPulso = registroPulsos.get(i);
+            Pulso pulso =  getPulso(pulsos, registroPulso.pulsoID);
+            Ambulancia ambulancia = getAmbulancia(ambulancias, registroPulso.ambulanciaID);
+            registroPulso.setPulso(pulso);
+            registroPulso.setAmbulancia(ambulancia);
+        }
     }
 
+    public void crearTablaRegistros(ArrayList<RegistroPulso> registroPulsos){
+        addRow(table, new String[]{"Señal", "Fecha", "Hora"}, -1);
+        for (int i = registroPulsos.size() -1 ; i >= 0; i --){
+            RegistroPulso registroPulso = registroPulsos.get(i);
+            String fecha = registroPulso.getFecah();
+            String hora = registroPulso.getHora();
+            String nombre = registroPulso.getPulso().getNombre();
+            addRow(table, new String[]{nombre, fecha, hora}, i);
+            //table.setColumnCollapsed(i, true);
 
+        }
+        //table.setStretchAllColumns(true);
+
+    }
+    public void showInfo(int id){
+
+        RegistroPulso registroPulso = registroPulsos.get(id);
+        View popup = getLayoutInflater().inflate(R.layout.dialog_info_registo_pulso, null);
+        TextView title = (TextView) popup.findViewById(R.id.textView_Title);
+        TextView prioridad = (TextView) popup.findViewById(R.id.textView_Prioridad);
+        TextView date = (TextView) popup.findViewById(R.id.textView_Date);
+        TextView ambulancia = (TextView) popup.findViewById(R.id.textView_Ambulancia);
+        TextView placa = (TextView) popup.findViewById(R.id.textView_Placa);
+        TextView conductor = (TextView) popup.findViewById(R.id.textView_Conductor);
+        Button okButton = (Button) popup.findViewById(R.id.button_Ok);
+
+        title.setText(registroPulso.pulso.nombre);
+
+        date.setText("Señal obtenidad el " + registroPulso.fecah + " a la " + registroPulso.hora);
+        ambulancia.setText("Ambulancia: " + String.valueOf(registroPulso.ambulanciaID));
+        placa.setText("Placa: " + registroPulso.ambulancia.placa);
+        conductor.setText("Conductor: " + String.valueOf(registroPulso.ambulancia.conductor));
+        try {
+            System.out.println(registroPulso.pulso.nombre);
+            prioridad.setText("Prioridad " + prioridades.get(registroPulso.pulso.nombre));
+        } catch (Exception e) {
+            prioridad.setText("Prioridad " + "Baja");
+        }
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Table_Registros_Pulsos_Activity.this);
+        mBuilder.setView(popup);
+        final AlertDialog dialog = mBuilder.create();
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+
+    }
 }
