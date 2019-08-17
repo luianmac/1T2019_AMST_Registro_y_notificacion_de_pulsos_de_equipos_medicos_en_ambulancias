@@ -235,7 +235,7 @@ public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
 
     public void addRow(final TableLayout table, String[] cells, final int id){
         TableRow row = new TableRow(getApplicationContext());
-        row.setLayoutParams(table.getLayoutParams());
+        //row.setLayoutParams(table.getLayoutParams());
         row.setGravity(Gravity.CENTER_HORIZONTAL);
         row.setPadding(0,0,0,20);
 
@@ -345,7 +345,5 @@ public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
         });
 
         dialog.show();
-
-
     }
 }
