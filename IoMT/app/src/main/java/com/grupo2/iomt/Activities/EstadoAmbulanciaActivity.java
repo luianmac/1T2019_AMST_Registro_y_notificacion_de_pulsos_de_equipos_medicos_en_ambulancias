@@ -1,22 +1,12 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -24,9 +14,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.grupo2.iomt.entity.Ambulancia;
+import com.grupo2.iomt.R;
+import com.grupo2.iomt.list_adapters.Ambulacia_listAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,12 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class estadoAmbulancia extends AppCompatActivity {
+public class EstadoAmbulanciaActivity extends AppCompatActivity {
     //Declaración de variables a usar
     private Button btn;
     private ListView list;
     //private ArrayAdapter<Ambulancia> adapter;
-    private ArrayList<Ambulancia> arrayList;
     private RequestQueue mQueue;
     private String token = "";
 

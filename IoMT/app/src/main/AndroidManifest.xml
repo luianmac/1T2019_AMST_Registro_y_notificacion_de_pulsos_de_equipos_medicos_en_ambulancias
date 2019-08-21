@@ -14,13 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Table_Registros_Pulsos_Activity"></activity>
-        <activity android:name=".estadoAmbulancia" />
-        <activity android:name=".GraficoPulsosActivity" />
-        <activity android:name=".pulsosDeAmbulancia" />
-        <activity android:name=".Menu" />
-        <activity android:name=".AlertActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.Table_Registros_Pulsos_Activity"></activity>
+        <activity android:name=".Activities.AlertActivity$Table_Registros_Pulsos_Activity" />
+        <activity android:name=".Activities.EstadoAmbulanciaActivity" />
+        <activity android:name=".Activities.GraficoPulsosActivity" />
+        <activity android:name=".Activities.PulsosDeAmbulanciaActivity" />
+        <activity android:name=".Activities.MenuActivity" />
+        <activity android:name=".Activities.AlertActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

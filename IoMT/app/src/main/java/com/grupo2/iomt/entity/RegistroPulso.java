@@ -2,16 +2,16 @@ package com.grupo2.iomt;
 
 public class RegistroPulso {
     int id;
-    String fecah;
+    String fecha;
     String hora;
     int pulsoID;
     int ambulanciaID;
     Ambulancia ambulancia;
     Pulso pulso;
 
-    public RegistroPulso(int id, String fecah, String hora, int pulso, int ambulancia) {
+    public RegistroPulso(int id, String fecha, String hora, int pulso, int ambulancia) {
         this.id = id;
-        this.fecah = fecah;
+        this.fecha = fecha;
         this.hora = hora;
         this.pulsoID = pulso;
         this.ambulanciaID = ambulancia;
@@ -25,12 +25,12 @@ public class RegistroPulso {
         this.id = id;
     }
 
-    public String getFecah() {
-        return fecah;
+    public String getFecha() {
+        return fecha;
     }
 
-    public void setFecah(String fecah) {
-        this.fecah = fecah;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getHora() {

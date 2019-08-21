@@ -1,20 +1,20 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View; //Es necesario importer las librerias
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.grupo2.iomt.R;
 import com.grupo2.iomt.dao.TokenDao;
 import com.grupo2.iomt.db.DB;
 import com.grupo2.iomt.entity.Token;
 
-public class Menu extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
     String token ;
     DB db;
     TokenDao tokenDAO;
@@ -32,7 +32,7 @@ public class Menu extends AppCompatActivity {
     /*La funcion IrEstadoAmbulancia cambia la vista del teléfono entre activity
     */
     public void irEstadoAmbulancia(View v){
-        Intent estado = new Intent(getBaseContext(),estadoAmbulancia.class);
+        Intent estado = new Intent(getBaseContext(), EstadoAmbulanciaActivity.class);
         estado.putExtra("token", token);
         startActivity(estado);
     }

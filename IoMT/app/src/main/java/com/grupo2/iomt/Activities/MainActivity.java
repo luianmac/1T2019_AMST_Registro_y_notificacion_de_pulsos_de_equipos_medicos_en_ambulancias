@@ -1,4 +1,4 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.grupo2.iomt.R;
 import com.grupo2.iomt.dao.TokenDao;
 import com.grupo2.iomt.db.DB;
 import com.grupo2.iomt.entity.Token;
@@ -29,9 +30,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import java.io.IOException;
-import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnLogin, btnRegistrarse;
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         Token token = getTokenSesion();
         if(token != null){
-            Intent i = new Intent(getBaseContext(), Menu.class);
+            Intent i = new Intent(getBaseContext(), MenuActivity.class);
             i.putExtra("token", token.getToken_string());
             startActivity(i);
         }
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     Token tokenTosave =  new Token(token);
                     tokenDAO.insert(tokenTosave);
 
-                    Intent i = new Intent(getBaseContext(), Menu.class);
+                    Intent i = new Intent(getBaseContext(), MenuActivity.class);
                     i.putExtra("token", token);
                     startActivity(i);
                 } catch (Exception e) {

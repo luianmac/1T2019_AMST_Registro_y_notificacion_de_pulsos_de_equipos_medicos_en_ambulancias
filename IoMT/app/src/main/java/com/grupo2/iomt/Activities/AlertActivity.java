@@ -1,9 +1,11 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.grupo2.iomt.R;
 
 public class AlertActivity extends AppCompatActivity {
 
@@ -16,4 +18,5 @@ public class AlertActivity extends AppCompatActivity {
         AlertActivity.super.onBackPressed();
 
     }
+
 }

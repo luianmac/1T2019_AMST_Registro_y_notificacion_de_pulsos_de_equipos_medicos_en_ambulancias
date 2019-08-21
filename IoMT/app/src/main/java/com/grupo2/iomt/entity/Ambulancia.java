@@ -1,23 +1,19 @@
-package com.grupo2.iomt.entity;
-
-//Clase creada con los mismos atributos definidos en la tabla para almacenar
-//los datos que se capturan de la base de datos
+package com.grupo2.iomt;
 
 public class Ambulancia {
-    private int id;
-    private String placa;
-    private  Boolean ocupado;
-    private int conductor;
+    int id;
+    String placa;
+    boolean ocupado;
+    int conductor;
 
-    public Ambulancia() {
-    }
-
-    public Ambulancia(int id, String placa, Boolean ocupado, int conductor) {
+    public Ambulancia(int id, String placa, boolean ocupado, int conductor) {
         this.id = id;
         this.placa = placa;
         this.ocupado = ocupado;
         this.conductor = conductor;
     }
+
+    public Ambulancia() {}
 
     public int getId() {
         return id;
@@ -35,11 +31,11 @@ public class Ambulancia {
         this.placa = placa;
     }
 
-    public Boolean getOcupado() {
+    public boolean isOcupado() {
         return ocupado;
     }
 
-    public void setOcupado(Boolean ocupado) {
+    public void setOcupado(boolean ocupado) {
         this.ocupado = ocupado;
     }
 
@@ -49,13 +45,5 @@ public class Ambulancia {
 
     public void setConductor(int conductor) {
         this.conductor = conductor;
-    }
-
-    @Override
-    public String toString() {
-        return  "ID:        " + id + "\n" +
-                "Placa:     " + placa + "\n" +
-                "Ocupado:   " + ocupado + "\n" +
-                "Conductor: " + conductor;
     }
 }
