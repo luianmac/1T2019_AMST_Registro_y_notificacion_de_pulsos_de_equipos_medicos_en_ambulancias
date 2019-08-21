@@ -3,19 +3,19 @@ Microchip MPLAB XC8 Compiler V2.05 ()
 Linker command line:
 
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.05\pic\dat\en_msgs.txt \
-  -cs -h+dist/default/production\DetectorDePulsos2372019.X.production.sym \
-  --cmf=dist/default/production\DetectorDePulsos2372019.X.production.cmf -z \
-  -Q16F18875 -oC:\Users\crist\AppData\Local\Temp\scgg.2 \
+  -cs -h+dist/default/production\DetectorDePulsos.X.production.sym \
+  --cmf=dist/default/production\DetectorDePulsos.X.production.cmf -z \
+  -Q16F18875 -oC:\Users\ESTUDI~1\AppData\Local\Temp\s510.2 \
   --defsym=__MPLAB_BUILD=1 \
-  -Mdist/default/production/DetectorDePulsos2372019.X.production.map -E1 \
-  -ver=XC8 --acfsm=1493 -ASTACK=02030h-023EFh -pstack=STACK \
-  -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 \
-  -ACONST=00h-0FFhx32 -AENTRY=00h-0FFhx32 -ACOMMON=070h-07Fh \
-  -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh \
-  -ABANK3=01A0h-01EFh -ABANK4=0220h-026Fh -ABANK5=02A0h-02EFh \
-  -ABANK6=0320h-036Fh -ABANK7=03A0h-03EFh -ABANK8=0420h-046Fh \
-  -ABANK9=04A0h-04EFh -ABANK10=0520h-056Fh -ABANK11=05A0h-05EFh \
-  -ABANK12=0620h-064Fh -ABIGRAM=02000h-023EFh \
+  -Mdist/default/production/DetectorDePulsos.X.production.map -E1 -ver=XC8 \
+  --acfsm=1493 -ASTACK=02030h-023EFh -pstack=STACK -ACODE=00h-07FFhx4 \
+  -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
+  -AENTRY=00h-0FFhx32 -ACOMMON=070h-07Fh -ABANK0=020h-06Fh \
+  -ABANK1=0A0h-0EFh -ABANK2=0120h-016Fh -ABANK3=01A0h-01EFh \
+  -ABANK4=0220h-026Fh -ABANK5=02A0h-02EFh -ABANK6=0320h-036Fh \
+  -ABANK7=03A0h-03EFh -ABANK8=0420h-046Fh -ABANK9=04A0h-04EFh \
+  -ABANK10=0520h-056Fh -ABANK11=05A0h-05EFh -ABANK12=0620h-064Fh \
+  -ABIGRAM=02000h-023EFh \
   -ARAM=020h-06Fh,0A0h-0EFh,0120h-016Fh,01A0h-01EFh,0220h-026Fh,02A0h-02EFh,0320h-036Fh,03A0h-03EFh,0420h-046Fh,04A0h-04EFh,0520h-056Fh,05A0h-05EFh,0620h-064Fh \
   -AABS1=020h-07Fh,0A0h-0EFh,0120h-016Fh,01A0h-01EFh,0220h-026Fh,02A0h-02EFh,0320h-036Fh,03A0h-03EFh,0420h-046Fh,04A0h-04EFh,0520h-056Fh,05A0h-05EFh,0620h-064Fh \
   -ASFR0=00h-01Fh -ASFR1=080h-09Fh -ASFR2=0100h-011Fh -ASFR3=0180h-019Fh \
@@ -33,8 +33,8 @@ Linker command line:
   -pconfig=CONFIG -DCONFIG=2 -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 \
   -AEEDATA=00h-0FFh/0F000h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
-  C:\Users\crist\AppData\Local\Temp\scgg.o \
-  dist/default/production\DetectorDePulsos2372019.X.production.o 
+  C:\Users\ESTUDI~1\AppData\Local\Temp\s510.o \
+  dist/default/production\DetectorDePulsos.X.production.o 
 
 Object code version is 3.11
 
@@ -43,11 +43,11 @@ Machine type is 16F18875
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\crist\AppData\Local\Temp\scgg.o
+C:\Users\ESTUDI~1\AppData\Local\Temp\s510.o
                 end_init                             2C       2C        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        5    1000E       0
-dist/default/production\DetectorDePulsos2372019.X.production.o
+dist/default/production\DetectorDePulsos.X.production.o
                 cinit                                2E       2E        F        8       0
                 intentry                              4        4       28        8       0
                 text28                              20A      20A       17        8       0
