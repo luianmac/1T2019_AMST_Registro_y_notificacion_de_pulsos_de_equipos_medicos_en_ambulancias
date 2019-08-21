@@ -1,4 +1,4 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.entity;
 
 public class Pulso {
     int id;

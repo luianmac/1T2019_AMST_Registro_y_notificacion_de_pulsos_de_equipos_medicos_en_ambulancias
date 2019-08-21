@@ -1,4 +1,4 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.helpers;
 
 import android.app.Activity;
 import android.content.Context;

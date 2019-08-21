@@ -1,4 +1,4 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.list_adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.grupo2.iomt.R;
 
 import java.util.ArrayList;
 

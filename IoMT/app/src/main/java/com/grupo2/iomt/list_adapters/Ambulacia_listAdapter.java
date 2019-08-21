@@ -1,4 +1,4 @@
-package com.grupo2.iomt;
+package com.grupo2.iomt.list_adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.grupo2.iomt.R;
+import com.grupo2.iomt.Activities.PulsosDeAmbulanciaActivity;
 
 import java.util.ArrayList;
 
@@ -63,7 +66,7 @@ String token;
                                            @Override
                                            public void onClick(View view) {
                                                System.out.println("Aquillllllllllll");
-                                               Intent pulsos = new Intent(context,pulsosDeAmbulancia.class);
+                                               Intent pulsos = new Intent(context, PulsosDeAmbulanciaActivity.class);
                                                //System.out.println("ESSSSTOOOOO             " + position);
                                                pulsos.putExtra("idAmbulancia", Integer.parseInt(ambulaciaNums.get(selectedPos)));
                                                pulsos.putExtra("token", token);
