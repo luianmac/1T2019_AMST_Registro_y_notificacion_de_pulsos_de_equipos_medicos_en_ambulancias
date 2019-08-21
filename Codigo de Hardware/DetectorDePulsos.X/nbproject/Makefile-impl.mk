@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=DetectorDePulsos2372019.X
+PROJECTNAME=DetectorDePulsos.X
 
 # Active Configuration
 DEFAULTCONF=default

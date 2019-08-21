@@ -1,5 +1,5 @@
-int FREQUENCIA=50;//frecuencia 
-int Salida = 11; // pin de salida
+int FREQUENCIA=100;//frecuencia 
+int Salida = 11; // pin de salida de pulsos
 void setup() {
   pinMode(Salida,OUTPUT);
 }
@@ -11,6 +11,4 @@ void loop() {
           digitalWrite(Salida, LOW);
           delayMicroseconds(1000000L/(2*FREQUENCIA));
     }
-  
-  
 }
