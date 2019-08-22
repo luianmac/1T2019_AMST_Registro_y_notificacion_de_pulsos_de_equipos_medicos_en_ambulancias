@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.grupo2.iomt.R;
 
 import java.util.Random;
 
@@ -21,6 +22,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.d("TOKENFIREBASE", s);
+        Log.d("sss", "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     }
 
     @Override
@@ -51,7 +53,9 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(title)
                 .setContentText(body)
+                .setSmallIcon(R.drawable.ambulancia)
                 .setContentInfo("info");
+
         notificationManager.notify(
                 new Random().nextInt(), notificationBuilder.build());
     }
