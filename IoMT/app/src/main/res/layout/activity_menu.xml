@@ -22,7 +22,8 @@
                 android:layout_height="121dp"
                 android:background="#FFFFFF"
 
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/logo"
+                tools:ignore="ContentDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -45,7 +46,8 @@
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/signos" />
+                    app:srcCompat="@drawable/signos"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -75,7 +77,8 @@
                     android:onClick="cerrarSesion"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/usuario2" />
+                    app:srcCompat="@drawable/usuario2"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -90,7 +93,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnSesion"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="SmallSp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -115,7 +119,8 @@
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ambulancia" />
+                    app:srcCompat="@drawable/ambulancia"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -131,13 +136,55 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnBateria"
                     app:layout_constraintVertical_bias="0.17" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:layout_height="204dp"
+                android:background="#FFFFFF">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/percentageLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="49%"
+                        android:textSize="24sp"
+                        tools:ignore="MissingConstraints" />
+
+                    <ImageView
+                        android:id="@+id/batteryImage"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/b50"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:text="BATERIA" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="203dp"
                 tools:layout_editor_absoluteY="528dp"
-                android:background="#FFFFFF"
+                android:background="#E6E6E6"
                 >
 
                 <ImageButton
@@ -150,7 +197,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="#FFFFFF"
+                    android:background="#E6E6E6"
                     android:onClick="salir"
                     android:scaleType="fitCenter"
                     android:scaleX="0.8"
@@ -176,6 +223,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/btnSalir"
                     app:layout_constraintVertical_bias="0.17" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 
