@@ -33,14 +33,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Main activity.
+ * @author Richard Ruales
+ * @author Allan Orellana
+ * @version 2.0
+ */
 public class MainActivity extends AppCompatActivity {
     private Button btnLogin, btnRegistrarse;
     private EditText user,pass;
     private RequestQueue mQueue=null;
     private String token=null;
+    /**
+     * The Shared preferences.
+     */
     SharedPreferences sharedPreferences;
 
+    /**
+     * The Db.
+     */
     DB db;
+    /**
+     * The Token dao.
+     */
     TokenDao tokenDAO;
 
     @Override
@@ -71,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * Get token sesion token.
+     *
+     * @return the token
+     */
     public Token getTokenSesion(){
         ArrayList<Token> tokens = (ArrayList<Token>) tokenDAO.getItems();
         System.out.println("token size" + String.valueOf(tokens.size()));
@@ -80,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
             return null;
     }
 
+    /**
+     * Iniciar sesion.
+     *
+     * @param view the view
+     */
     public void IniciarSesion(View view){
         final EditText dt1=(EditText) findViewById(R.id.txtUser);
         final EditText dt2=(EditText) findViewById(R.id.txtPasswd);
@@ -92,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             iniciarSesion(usuario,contrasena);
         }
-
     }
 
     private void cargarCredenciales() {

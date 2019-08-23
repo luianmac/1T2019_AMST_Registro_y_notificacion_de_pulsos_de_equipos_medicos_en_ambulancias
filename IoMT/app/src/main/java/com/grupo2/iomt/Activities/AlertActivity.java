@@ -7,6 +7,11 @@ import android.view.View;
 
 import com.grupo2.iomt.R;
 
+/**
+ * The type Alert activity.
+ * @author Richard Ruales
+ * @version 1.0
+ */
 public class AlertActivity extends AppCompatActivity {
 
     @Override
@@ -14,6 +19,12 @@ public class AlertActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert);
     }
+
+    /**
+     * Retroceder.
+     *
+     * @param v the v
+     */
     public void retroceder(View v){
         AlertActivity.super.onBackPressed();
 

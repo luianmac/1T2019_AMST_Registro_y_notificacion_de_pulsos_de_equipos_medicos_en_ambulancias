@@ -7,14 +7,19 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+/**
+ * The type Check internet.
+ * @author Alla Orellana
+ * @version 1.0
+ *
+ */
 public class CheckInternet {
 
-    /*
-    Autor: Allan Orellana
-    Parametros: ninguno
-    Descripcion: Realiza un ping (ICMP) al servidor DNS de Google. Basta con tener una respuesta para saber si hay conexion con Internet
-    Devuelve: True si hay error en la conexion, y false si no lo hay.
+    /**
+     * Realiza un ping (ICMP) al servidor DNS de Google. Basta con tener una respuesta para saber si hay conexion con Internet
+     * @return True si hay error en la conexion, y false si no lo hay.
      */
+
     public static boolean errorConexion() {
         Runtime runtime = Runtime.getRuntime();
         try {

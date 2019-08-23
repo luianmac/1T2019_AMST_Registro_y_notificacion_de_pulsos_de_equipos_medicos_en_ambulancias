@@ -27,22 +27,63 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * The type Grafico pulsos activity.
+ * @author Allan Orellana
+ * @version 1.0
+ */
 public class GraficoPulsosActivity extends AppCompatActivity {
+    /**
+     * The Bar chart.
+     */
     BarChart barChart;
+    /**
+     * The Token.
+     */
     String token;
+    /**
+     * The Url registo pulsos.
+     */
     String urlRegistoPulsos = "https://amstdb.herokuapp.com/db/registroDePulsos";
+    /**
+     * The Url ambulancia.
+     */
     String urlAmbulancia = "https://amstdb.herokuapp.com/db/ambulancia";
+    /**
+     * The Url pulsos.
+     */
     String urlPulsos = "https://amstdb.herokuapp.com/db/pulsos";
+    /**
+     * The Table.
+     */
     TableLayout table;
+    /**
+     * The Registro pulsos.
+     */
     ArrayList<RegistroPulso> registroPulsos;
+    /**
+     * The Ambulancias.
+     */
     ArrayList<Ambulancia> ambulancias;
+    /**
+     * The Pulsos.
+     */
     ArrayList<Pulso> pulsos;
+    /**
+     * The Get tables helper.
+     */
     GetTablesHelper getTablesHelper;
 
+    /**
+     * The Handler.
+     */
     Handler handler;
+    /**
+     * The Runnable.
+     */
     Runnable runnable;
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grafico_pulsos);
@@ -64,15 +105,15 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
         handler = new Handler();
         runnable = new Runnable() {
-           @Override
-           public void run() {
-               registroPulsos = new ArrayList<>();
-               ambulancias = new ArrayList<>();
-               pulsos = new ArrayList<>();
-               actualizar();
-               handler.postDelayed(this, 10000);
+            @Override
+            public void run() {
+                registroPulsos = new ArrayList<>();
+                ambulancias = new ArrayList<>();
+                pulsos = new ArrayList<>();
+                actualizar();
+                handler.postDelayed(this, 10000);
             }
-       };
+        };
         runnable.run();
 
     }
@@ -84,6 +125,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         super.onBackPressed();
 
     }
+
+    /**
+     * Ir detalles.
+     *
+     * @param v the v
+     */
     public void irDetalles(View v){
         handler.removeCallbacks(runnable);
         Intent intent = new Intent(getApplicationContext(), Table_Registros_Pulsos_Activity.class);
@@ -91,6 +138,9 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Actualizar.
+     */
     public void actualizar(){
         System.out.println("Acccccccccc");
         getTablesHelper.getTables(urlRegistoPulsos, urlPulsos, urlAmbulancia);
@@ -114,36 +164,48 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         }, 3000);
     }
 
+    /**
+     * Set data barchart.
+     *
+     * @param barChart the bar chart
+     * @param map      the map
+     */
     public void setDataBarchart(BarChart barChart, Map<String, Integer> map){
-            String[] labels = new String[map.keySet().size()];
-            ArrayList<BarEntry> barEntries = new ArrayList<>();
+        String[] labels = new String[map.keySet().size()];
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
 
-            int maxValue = 0;
-            Iterator <Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-            int counter = 0;
-            while (iterator.hasNext()){
-                Map.Entry<String, Integer> i = iterator.next();
-                String key = i.getKey();
-                Integer value = i.getValue();
-                barEntries.add(new BarEntry(counter, value));
+        int maxValue = 0;
+        Iterator <Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+        int counter = 0;
+        while (iterator.hasNext()){
+            Map.Entry<String, Integer> i = iterator.next();
+            String key = i.getKey();
+            Integer value = i.getValue();
+            barEntries.add(new BarEntry(counter, value));
 
-                labels[counter] = key;
-                counter ++;
-                if (value > maxValue)
-                    maxValue = value;
-            }
-            BarDataSet barDataSet = new BarDataSet(barEntries, "Pulsos");
-            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            labels[counter] = key;
+            counter ++;
+            if (value > maxValue)
+                maxValue = value;
+        }
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Pulsos");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
 
-            BarData barData = new BarData(barDataSet);
-            //barData.setBarWidth(0.9f);
+        BarData barData = new BarData(barDataSet);
+        //barData.setBarWidth(0.9f);
 
-            barChart.setData(barData);
-            add_labels_Barchart(barChart, labels);
+        barChart.setData(barData);
+        add_labels_Barchart(barChart, labels);
 
     }
 
+    /**
+     * Add labels barchart.
+     *
+     * @param barChart the bar chart
+     * @param labels   the labels
+     */
     public void add_labels_Barchart(BarChart barChart, String[] labels){
         IndexAxisValueFormatter indexFormatter = new IndexAxisValueFormatter();
         indexFormatter.setValues(labels);
@@ -160,6 +222,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         xAxis.setXOffset(-20);
 
     }
+
+    /**
+     * Init barchart.
+     *
+     * @param barChart the bar chart
+     */
     public void init_Barchart(BarChart barChart){
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(false);
@@ -172,6 +240,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Contar pulsos map.
+     *
+     * @param registroPulsos the registro pulsos
+     * @return the map
+     */
     public Map<String, Integer> contarPulsos(ArrayList<RegistroPulso> registroPulsos){
         Map<String, Integer> contador = new HashMap<>();
         for (int i = 0; i<registroPulsos.size(); i++){

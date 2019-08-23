@@ -15,19 +15,57 @@ import com.grupo2.iomt.Activities.PulsosDeAmbulanciaActivity;
 
 import java.util.ArrayList;
 
+/**
+ * The type Ambulacia list adapter.
+ * @author Allan Orellana
+ * @version 1.0
+ */
 public class Ambulacia_listAdapter extends ArrayAdapter<String> {
     private final Activity context;
     //private final ArrayList<String> maintitle;
     //private final ArrayList<String> subtitle;
     //private final ArrayList<Integer> imgid;
 
+    /**
+     * The Ambulacia nums.
+     */
     ArrayList <String> ambulaciaNums;
+    /**
+     * The Ambulacia placas.
+     */
     ArrayList <String> ambulaciaPlacas;
+    /**
+     * The Ambulacia ocupadas.
+     */
     ArrayList <Boolean> ambulaciaOcupadas;
+    /**
+     * The Ambulacia num conductores.
+     */
     ArrayList <String> ambulaciaNumConductores;
+    /**
+     * The Ambulacia imagenes.
+     */
     ArrayList<Integer> ambulaciaImagenes;
+    /**
+     * The Selected pos.
+     */
     Integer selectedPos;
-String token;
+    /**
+     * The Token.
+     */
+    String token;
+
+    /**
+     * Instantiates a new Ambulacia list adapter.
+     *
+     * @param context                 the context
+     * @param ambulaciaNums           the ambulacia nums
+     * @param ambulaciaPlacas         the ambulacia placas
+     * @param ambulaciaOcupadas       the ambulacia ocupadas
+     * @param ambulaciaNumConductores the ambulacia num conductores
+     * @param ambulaciaImagenes       the ambulacia imagenes
+     * @param token                   the token
+     */
     public Ambulacia_listAdapter(Activity context, ArrayList ambulaciaNums, ArrayList ambulaciaPlacas, ArrayList ambulaciaOcupadas, ArrayList ambulaciaNumConductores, ArrayList ambulaciaImagenes, String token) {
         super(context, R.layout.ambulacia_list, ambulaciaNums);
         // TODO Auto-generated constructor stub

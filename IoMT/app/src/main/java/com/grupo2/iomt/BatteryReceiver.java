@@ -15,6 +15,11 @@ import com.grupo2.iomt.Activities.MenuActivity;
 import com.grupo2.iomt.db.DB;
 import com.grupo2.iomt.helpers.GetTablesHelper;
 
+/**
+ * The type Battery receiver.
+ * @author Allan Orellna
+ * @version 1.0
+ */
 public class BatteryReceiver extends BroadcastReceiver {
 
     @Override
