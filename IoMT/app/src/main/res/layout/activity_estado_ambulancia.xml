@@ -11,7 +11,11 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ACTUALIZAR" />
+        android:text="PRESIONA PARA ACTUALIZAR"
+        android:background="#00B8FF"
+        android:textColor="#FFFFFF"
+        android:shadowRadius="@android:integer/config_mediumAnimTime"
+        />
 
     <ListView
         android:id="@+id/listView"

@@ -68,7 +68,7 @@ public class BatteryReceiver extends BroadcastReceiver {
 
                 }
 
-            }, 2000);
+            }, 1500);
             // Status
         }
     }

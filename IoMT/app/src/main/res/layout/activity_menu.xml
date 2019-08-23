@@ -161,8 +161,8 @@
 
                     <ImageView
                         android:id="@+id/batteryImage"
-                        android:layout_width="118dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/b50"
                         tools:ignore="MissingConstraints" />
@@ -171,7 +171,10 @@
                         android:id="@+id/textView6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:text="BATERIA" />
 
                 </LinearLayout>
 
@@ -194,7 +197,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="#FFFFFF"
+                    android:background="#E6E6E6"
                     android:onClick="salir"
                     android:scaleType="fitCenter"
                     android:scaleX="0.8"
