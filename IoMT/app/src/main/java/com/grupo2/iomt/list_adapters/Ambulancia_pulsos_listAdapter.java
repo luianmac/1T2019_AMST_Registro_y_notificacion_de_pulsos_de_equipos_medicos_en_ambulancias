@@ -14,18 +14,45 @@ import com.grupo2.iomt.R;
 
 import java.util.ArrayList;
 
+/**
+ * The type Ambulancia pulsos list adapter.
+ * @author Allan Orellana
+ * @version 1.0
+ */
 public class Ambulancia_pulsos_listAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    //private final ArrayList<String> maintitle;
-    //private final ArrayList<String> subtitle;
-    //private final ArrayList<Integer> imgid;
 
+    /**
+     * The Tipos pulsos.
+     */
     ArrayList<String> tiposPulsos;
+    /**
+     * The Fechas.
+     */
     ArrayList <String> fechas;
+    /**
+     * The Descripciones.
+     */
     ArrayList <String> descripciones;
+    /**
+     * The Prioridades imagenes.
+     */
     ArrayList<Integer> prioridadesImagenes;
+    /**
+     * The Selected pos.
+     */
     Integer selectedPos;
+
+    /**
+     * Instantiates a new Ambulancia pulsos list adapter.
+     *
+     * @param context             the context
+     * @param tiposPulsos         the tipos pulsos
+     * @param fechas              the fechas
+     * @param descripciones       the descripciones
+     * @param prioridadesImagenes the prioridades imagenes
+     */
     public Ambulancia_pulsos_listAdapter(Activity context, ArrayList tiposPulsos, ArrayList fechas, ArrayList descripciones, ArrayList prioridadesImagenes) {
         super(context, R.layout.ambulacia_list, tiposPulsos);
         // TODO Auto-generated constructor stub

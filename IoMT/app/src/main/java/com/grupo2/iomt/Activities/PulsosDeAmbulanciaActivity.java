@@ -30,24 +30,75 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Pulsos de ambulancia activity.
+ * @author Allan Orellana
+ * @author Richard Ruales
+ * @version 2.0
+ */
 public class PulsosDeAmbulanciaActivity extends AppCompatActivity {
-    //Declaracion de variables a usar
+    /**
+     * The Id ambulancia.
+     */
+//Declaracion de variables a usar
     int idAmbulancia;
+    /**
+     * The Token.
+     */
     String token;
+    /**
+     * The Array registro pulsos.
+     */
     ArrayList<RegistroPulso> arrayRegistroPulsos = new ArrayList<>();
+    /**
+     * The Tiempo.
+     */
     Tiempo tiempo;
+    /**
+     * The Tipos pulsos.
+     */
     ArrayList<String> tiposPulsos;
+    /**
+     * The Fechas.
+     */
     ArrayList <String> fechas;
+    /**
+     * The Descripciones.
+     */
     ArrayList <String> descripciones;
+    /**
+     * The Prioridades imagenes.
+     */
     ArrayList<Integer> prioridadesImagenes;
+    /**
+     * The Prioridades.
+     */
     Map<String, String> prioridades;
     private Ambulancia_pulsos_listAdapter adapter;
+    /**
+     * The List.
+     */
     ListView list;
+    /**
+     * The Get tables helper.
+     */
     GetTablesHelper getTablesHelper;
+    /**
+     * The Url registo pulsos.
+     */
     String urlRegistoPulsos = "https://amstdb.herokuapp.com/db/registroDePulsos";
+    /**
+     * The Url ambulancia.
+     */
     String urlAmbulancia = "https://amstdb.herokuapp.com/db/ambulancia";
+    /**
+     * The Url pulsos.
+     */
     String urlPulsos = "https://amstdb.herokuapp.com/db/pulsos";
 
+    /**
+     * Instantiates a new Pulsos de ambulancia activity.
+     */
     public PulsosDeAmbulanciaActivity() {
     }
 
@@ -77,7 +128,11 @@ public class PulsosDeAmbulanciaActivity extends AppCompatActivity {
         tiempo.execute();
 
     }
-    //Método que permite poner en espera cada segundo
+
+    /**
+     * Hilo.
+     */
+//Método que permite poner en espera cada segundo
     public void hilo(){
         try {
             Thread.sleep(1000);
@@ -86,6 +141,9 @@ public class PulsosDeAmbulanciaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Ejecutar.
+     */
     public void ejecutar(){
         tiempo = new Tiempo();
         tiempo.execute();
@@ -93,7 +151,10 @@ public class PulsosDeAmbulanciaActivity extends AppCompatActivity {
     }
 
 
-    //Clase para ser ejecutada en segundo plano
+    /**
+     * The type Tiempo.
+     */
+//Clase para ser ejecutada en segundo plano
     public class Tiempo extends AsyncTask<Void,Integer,Boolean>{
         //Método para validar que se cumpla el método hilo()
         @Override

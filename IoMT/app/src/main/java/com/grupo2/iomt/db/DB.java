@@ -6,13 +6,21 @@ import androidx.room.RoomDatabase;
 import com.grupo2.iomt.dao.TokenDao;
 import com.grupo2.iomt.entity.Token;
 
-/*
-author: Allan Orellana
-version: 1
-description: this database has handle all DAOs
- */
 
+
+/**
+ * The type Db.
+ *
+ * @author Allan Orellana
+ * @version 1
+ *
+ */
 @Database(entities = {Token.class}, version = 1)
 public abstract class DB extends RoomDatabase {
+    /**
+     * Gets token dao.
+     *
+     * @return the token dao
+     */
     public abstract TokenDao getTokenDAO();
 }

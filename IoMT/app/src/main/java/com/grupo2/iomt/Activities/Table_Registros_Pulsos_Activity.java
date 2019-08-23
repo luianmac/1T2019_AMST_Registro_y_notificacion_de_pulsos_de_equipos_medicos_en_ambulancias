@@ -21,18 +21,56 @@ import com.grupo2.iomt.helpers.GetTablesHelper;
 
 import java.util.ArrayList;
 
+/**
+ * The type Table registros pulsos activity.
+ * @author Allan Orellana
+ * @version 1.0
+ */
 public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
 
+    /**
+     * The Token.
+     */
     String token;
+    /**
+     * The Url registo pulsos.
+     */
     String urlRegistoPulsos = "https://amstdb.herokuapp.com/db/registroDePulsos";
+    /**
+     * The Url ambulancia.
+     */
     String urlAmbulancia = "https://amstdb.herokuapp.com/db/ambulancia";
+    /**
+     * The Url pulsos.
+     */
     String urlPulsos = "https://amstdb.herokuapp.com/db/pulsos";
+    /**
+     * The Table.
+     */
     TableLayout table;
+    /**
+     * The Registro pulsos.
+     */
     ArrayList<RegistroPulso> registroPulsos;
+    /**
+     * The Ambulancias.
+     */
     ArrayList<Ambulancia> ambulancias;
+    /**
+     * The Pulsos.
+     */
     ArrayList<Pulso> pulsos;
+    /**
+     * The Handler.
+     */
     Handler handler;
+    /**
+     * The Runnable.
+     */
     Runnable runnable;
+    /**
+     * The Get tables helper.
+     */
     GetTablesHelper getTablesHelper;
 
 
@@ -72,6 +110,9 @@ public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * Actualizar.
+     */
     public void actualizar(){
         getTablesHelper.getTables(urlRegistoPulsos, urlPulsos, urlAmbulancia);
         new Handler().postDelayed(new Runnable() {
@@ -89,7 +130,13 @@ public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Add row.
+     *
+     * @param table the table
+     * @param cells the cells
+     * @param id    the id
+     */
     public void addRow(final TableLayout table, String[] cells, final int id){
         TableRow row = new TableRow(getApplicationContext());
         //row.setLayoutParams(table.getLayoutParams());
@@ -126,6 +173,11 @@ public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
     }
 
 
+    /**
+     * Crear tabla registros.
+     *
+     * @param registroPulsos the registro pulsos
+     */
     public void crearTablaRegistros(ArrayList<RegistroPulso> registroPulsos){
         addRow(table, new String[]{"Señal", "Fecha", "Hora"}, -1);
         for (int i = registroPulsos.size() -1 ; i >= 0; i --){
@@ -140,6 +192,12 @@ public class Table_Registros_Pulsos_Activity extends AppCompatActivity {
         //table.setStretchAllColumns(true);
 
     }
+
+    /**
+     * Show info.
+     *
+     * @param id the id
+     */
     public void showInfo(int id){
 
         RegistroPulso registroPulso = registroPulsos.get(id);

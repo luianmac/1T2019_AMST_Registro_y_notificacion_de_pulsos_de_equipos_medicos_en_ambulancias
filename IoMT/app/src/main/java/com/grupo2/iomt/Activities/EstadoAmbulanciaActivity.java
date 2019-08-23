@@ -27,6 +27,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Estado ambulancia activity.
+ * @author Richard Ruales
+ * @version 1.0
+ */
 public class EstadoAmbulanciaActivity extends AppCompatActivity {
     //Declaración de variables a usar
     private Button btn;

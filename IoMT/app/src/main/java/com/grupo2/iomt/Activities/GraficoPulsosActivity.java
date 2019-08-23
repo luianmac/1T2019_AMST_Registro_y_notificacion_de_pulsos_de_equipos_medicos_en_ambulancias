@@ -27,19 +27,60 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * The type Grafico pulsos activity.
+ * @author Allan Orellana
+ * @version 1.0
+ */
 public class GraficoPulsosActivity extends AppCompatActivity {
+    /**
+     * The Bar chart.
+     */
     BarChart barChart;
+    /**
+     * The Token.
+     */
     String token;
+    /**
+     * The Url registo pulsos.
+     */
     String urlRegistoPulsos = "https://amstdb.herokuapp.com/db/registroDePulsos";
+    /**
+     * The Url ambulancia.
+     */
     String urlAmbulancia = "https://amstdb.herokuapp.com/db/ambulancia";
+    /**
+     * The Url pulsos.
+     */
     String urlPulsos = "https://amstdb.herokuapp.com/db/pulsos";
+    /**
+     * The Table.
+     */
     TableLayout table;
+    /**
+     * The Registro pulsos.
+     */
     ArrayList<RegistroPulso> registroPulsos;
+    /**
+     * The Ambulancias.
+     */
     ArrayList<Ambulancia> ambulancias;
+    /**
+     * The Pulsos.
+     */
     ArrayList<Pulso> pulsos;
+    /**
+     * The Get tables helper.
+     */
     GetTablesHelper getTablesHelper;
 
+    /**
+     * The Handler.
+     */
     Handler handler;
+    /**
+     * The Runnable.
+     */
     Runnable runnable;
 
         @Override
@@ -84,6 +125,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         super.onBackPressed();
 
     }
+
+    /**
+     * Ir detalles.
+     *
+     * @param v the v
+     */
     public void irDetalles(View v){
         handler.removeCallbacks(runnable);
         Intent intent = new Intent(getApplicationContext(), Table_Registros_Pulsos_Activity.class);
@@ -91,6 +138,9 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Actualizar.
+     */
     public void actualizar(){
         System.out.println("Acccccccccc");
         getTablesHelper.getTables(urlRegistoPulsos, urlPulsos, urlAmbulancia);
@@ -114,6 +164,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         }, 3000);
     }
 
+    /**
+     * Set data barchart.
+     *
+     * @param barChart the bar chart
+     * @param map      the map
+     */
     public void setDataBarchart(BarChart barChart, Map<String, Integer> map){
             String[] labels = new String[map.keySet().size()];
             ArrayList<BarEntry> barEntries = new ArrayList<>();
@@ -144,6 +200,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Add labels barchart.
+     *
+     * @param barChart the bar chart
+     * @param labels   the labels
+     */
     public void add_labels_Barchart(BarChart barChart, String[] labels){
         IndexAxisValueFormatter indexFormatter = new IndexAxisValueFormatter();
         indexFormatter.setValues(labels);
@@ -160,6 +222,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
         xAxis.setXOffset(-20);
 
     }
+
+    /**
+     * Init barchart.
+     *
+     * @param barChart the bar chart
+     */
     public void init_Barchart(BarChart barChart){
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(false);
@@ -172,6 +240,12 @@ public class GraficoPulsosActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Contar pulsos map.
+     *
+     * @param registroPulsos the registro pulsos
+     * @return the map
+     */
     public Map<String, Integer> contarPulsos(ArrayList<RegistroPulso> registroPulsos){
         Map<String, Integer> contador = new HashMap<>();
         for (int i = 0; i<registroPulsos.size(); i++){

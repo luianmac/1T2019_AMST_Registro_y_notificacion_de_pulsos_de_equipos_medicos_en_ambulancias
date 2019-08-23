@@ -26,18 +26,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Get tables helper.
+ * @author Allan Orellana
+ * @version 1.0
+ */
 public class GetTablesHelper {
     private ArrayList<RegistroPulso> registroPulsos;
     private ArrayList<Ambulancia> ambulancias;
     private ArrayList<Pulso> pulsos;
     private Map<String, String> params;
     private Map<String, String> prioridades;
-    private Map<String, String> codseñales;
+    private Map<String, String> signalCode;
     private RequestQueue queue;
     private String token;
     private Context context;
     private Integer bateria;
 
+    /**
+     * Instantiates a new Get tables helper.
+     *
+     *
+     * @param token   the token
+     * @param context the context
+     */
     public GetTablesHelper( String token, Context context) {
         prioridades = new HashMap<>();
         prioridades.put("Señal desconocida", "Baja");
@@ -48,13 +60,13 @@ public class GetTablesHelper {
         prioridades.put("Presion arterial alta", "Media");
         prioridades.put("Sin señal", "Baja");
 
-        codseñales = new HashMap<>();
-        codseñales.put("SED", "Desconocida");
-        codseñales.put("HIP", "Hiperpirexia");
-        codseñales.put("PAB", "Presion Arterial Baja");
-        codseñales.put("ARR", "Arritmia");
-        codseñales.put("PCA", "Paro Cardiaco");
-        codseñales.put("PAA", "Presion Arterial Alta");
+        signalCode = new HashMap<>();
+        signalCode.put("SED", "Desconocida");
+        signalCode.put("HIP", "Hiperpirexia");
+        signalCode.put("PAB", "Presion Arterial Baja");
+        signalCode.put("ARR", "Arritmia");
+        signalCode.put("PCA", "Paro Cardiaco");
+        signalCode.put("PAA", "Presion Arterial Alta");
 
         queue = Volley.newRequestQueue(context);
 
@@ -78,6 +90,13 @@ public class GetTablesHelper {
         return db;
     }
 
+    /**
+     * Get tables.
+     *
+     * @param urlRegistros  the url registros
+     * @param urlPulsos     the url pulsos
+     * @param urlAmbulancia the url ambulancia
+     */
     public void getTables(String urlRegistros, String urlPulsos, String urlAmbulancia){
         registroPulsos.clear();
         pulsos.clear();
@@ -89,6 +108,11 @@ public class GetTablesHelper {
     }
 
 
+    /**
+     * Obtener pulsos.
+     *
+     * @param url the url
+     */
     public void obtenerPulsos(String url){
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -100,8 +124,8 @@ public class GetTablesHelper {
                                 JSONObject pulsoJ = response.getJSONObject(i);
                                 int id = pulsoJ.getInt("id");
                                 String nombre = pulsoJ.getString("nombre");
-                                if(codseñales.containsKey(nombre))
-                                    nombre = codseñales.get(nombre);
+                                if(signalCode.containsKey(nombre))
+                                    nombre = signalCode.get(nombre);
                                 int  numero_pulsos = pulsoJ.getInt("numero_pulsos");
                                 String descripcion = pulsoJ.getString("descripcion");
                                 Pulso pulso = new Pulso(id,nombre,numero_pulsos,descripcion);
@@ -127,6 +151,11 @@ public class GetTablesHelper {
     }
 
 
+    /**
+     * Obtener registros.
+     *
+     * @param url the url
+     */
     public void obtenerRegistros(String url){
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -166,6 +195,11 @@ public class GetTablesHelper {
         queue.add(request);
     }
 
+    /**
+     * Obtener ambulancias.
+     *
+     * @param url the url
+     */
     public void obtenerAmbulancias(String url){
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url , null,
                 new Response.Listener<JSONArray>() {
@@ -201,6 +235,11 @@ public class GetTablesHelper {
         queue.add(request);
     }
 
+    /**
+     * Obtener bateria.
+     *
+     * @param url the url
+     */
     public void obtenerBateria(String url){
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, url, null,
@@ -230,6 +269,13 @@ public class GetTablesHelper {
         queue.add(request);
     }
 
+    /**
+     * Get pulso pulso.
+     *
+     * @param array the array
+     * @param id    the id
+     * @return the pulso
+     */
     public Pulso getPulso (ArrayList<Pulso> array, int id ){
         for (int i = 0; i<array.size(); i++){
             Pulso pulso= array.get(i);
@@ -238,6 +284,14 @@ public class GetTablesHelper {
         }
         return new Pulso();
     }
+
+    /**
+     * Get ambulancia ambulancia.
+     *
+     * @param array the array
+     * @param id    the id
+     * @return the ambulancia
+     */
     public Ambulancia getAmbulancia(ArrayList<Ambulancia> array, int id ){
         for (int i = 0; i<array.size(); i++){
             Ambulancia ambulancia= array.get(i);
@@ -247,6 +301,11 @@ public class GetTablesHelper {
         return new Ambulancia();
     }
 
+    /**
+     * Add ambulacia and pulso.
+     *
+     * @param registroPulsos the registro pulsos
+     */
     public void addAmbulaciaAndPulso(ArrayList<RegistroPulso> registroPulsos){
         for (int i = 0; i <registroPulsos.size(); i++){
             RegistroPulso registroPulso = registroPulsos.get(i);
@@ -256,6 +315,10 @@ public class GetTablesHelper {
             registroPulso.setAmbulancia(ambulancia);
         }
     }
+
+    /**
+     * Add ambulacia and pulso.
+     */
     public void addAmbulaciaAndPulso(){
         for (int i = 0; i <registroPulsos.size(); i++){
             RegistroPulso registroPulso = registroPulsos.get(i);
@@ -267,75 +330,164 @@ public class GetTablesHelper {
     }
 
 
-
+    /**
+     * Gets registro pulsos.
+     *
+     * @return the registro pulsos
+     */
     public ArrayList<RegistroPulso> getRegistroPulsos() {
         return registroPulsos;
     }
 
+    /**
+     * Sets registro pulsos.
+     *
+     * @param registroPulsos the registro pulsos
+     */
     public void setRegistroPulsos(ArrayList<RegistroPulso> registroPulsos) {
         this.registroPulsos = registroPulsos;
     }
 
+    /**
+     * Gets ambulancias.
+     *
+     * @return the ambulancias
+     */
     public ArrayList<Ambulancia> getAmbulancias() {
         return ambulancias;
     }
 
+    /**
+     * Sets ambulancias.
+     *
+     * @param ambulancias the ambulancias
+     */
     public void setAmbulancias(ArrayList<Ambulancia> ambulancias) {
         this.ambulancias = ambulancias;
     }
 
+    /**
+     * Gets pulsos.
+     *
+     * @return the pulsos
+     */
     public ArrayList<Pulso> getPulsos() {
         return pulsos;
     }
 
+    /**
+     * Sets pulsos.
+     *
+     * @param pulsos the pulsos
+     */
     public void setPulsos(ArrayList<Pulso> pulsos) {
         this.pulsos = pulsos;
     }
 
+    /**
+     * Gets params.
+     *
+     * @return the params
+     */
     public Map<String, String> getParams() {
         return params;
     }
 
+    /**
+     * Sets params.
+     *
+     * @param params the params
+     */
     public void setParams(Map<String, String> params) {
         this.params = params;
     }
 
+    /**
+     * Gets prioridades.
+     *
+     * @return the prioridades
+     */
     public Map<String, String> getPrioridades() {
         return prioridades;
     }
 
+    /**
+     * Sets prioridades.
+     *
+     * @param prioridades the prioridades
+     */
     public void setPrioridades(Map<String, String> prioridades) {
         this.prioridades = prioridades;
     }
 
-    public Map<String, String> getCodseñales() {
-        return codseñales;
+    /**
+     * Get signalCode map.
+     *
+     * @return the map
+     */
+    public Map<String, String> getSignalCode() {
+        return signalCode;
     }
 
-    public void setCodseñales(Map<String, String> codseñales) {
-        this.codseñales = codseñales;
+    /**
+     * Set codseñales.
+     *
+     * @param signalCode the signalCode
+     */
+    public void setSignalCode(Map<String, String> signalCode) {
+        this.signalCode = signalCode;
     }
 
+    /**
+     * Gets queue.
+     *
+     * @return the queue
+     */
     public RequestQueue getQueue() {
         return queue;
     }
 
+    /**
+     * Sets queue.
+     *
+     * @param queue the queue
+     */
     public void setQueue(RequestQueue queue) {
         this.queue = queue;
     }
 
+    /**
+     * Gets token.
+     *
+     * @return the token
+     */
     public String getToken() {
         return token;
     }
 
+    /**
+     * Sets token.
+     *
+     * @param token the token
+     */
     public void setToken(String token) {
         this.token = token;
     }
 
+    /**
+     * Gets bateria.
+     *
+     * @return the bateria
+     */
     public Integer getBateria() {
         return bateria;
     }
 
+    /**
+     * Sets bateria.
+     *
+     * @param bateria the bateria
+     */
     public void setBateria(Integer bateria) {
         this.bateria = bateria;
     }

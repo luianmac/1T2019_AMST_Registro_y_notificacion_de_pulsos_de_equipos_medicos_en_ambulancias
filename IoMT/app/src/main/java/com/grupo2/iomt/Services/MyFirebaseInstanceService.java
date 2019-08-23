@@ -16,13 +16,16 @@ import com.grupo2.iomt.R;
 
 import java.util.Random;
 
+/**
+ * The type My firebase instance service.
+ * @author Viviaba Mero
+ * @version 1.0
+ */
 public class MyFirebaseInstanceService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.d("TOKENFIREBASE", s);
-        Log.d("sss", "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     }
 
     @Override
