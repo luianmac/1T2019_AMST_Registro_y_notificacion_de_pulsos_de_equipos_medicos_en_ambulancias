@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -16,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.grupo2.iomt.R;
+import com.grupo2.iomt.helpers.CheckInternet;
 import com.grupo2.iomt.list_adapters.Ambulacia_listAdapter;
 
 import org.json.JSONArray;
@@ -77,6 +79,10 @@ public class EstadoAmbulanciaActivity extends AppCompatActivity {
      *los cuales son almacenados en un array para presentarlos mediante un ListView
      */
     private void actualizar(){
+        if(CheckInternet.errorConexion()){
+            Toast.makeText(this, "No hay conexion a Internet", Toast.LENGTH_LONG).show();
+        }
+
 
         String url_temp = "https://amstdb.herokuapp.com/db/ambulancia";
         JsonArrayRequest request = new JsonArrayRequest(

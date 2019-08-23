@@ -15,7 +15,7 @@ public class CheckInternet {
     Descripcion: Realiza un ping (ICMP) al servidor DNS de Google. Basta con tener una respuesta para saber si hay conexion con Internet
     Devuelve: True si hay error en la conexion, y false si no lo hay.
      */
-    static boolean errorConexion() {
+    public static boolean errorConexion() {
         Runtime runtime = Runtime.getRuntime();
         try {
             Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
