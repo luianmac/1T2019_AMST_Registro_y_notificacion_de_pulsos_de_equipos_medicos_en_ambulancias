@@ -46,7 +46,7 @@ class FirebaseRequest(json.JSONEncoder):
 
 
 
-@app.route('/SigFox', methods=['POST'])
+@app.route('/sigFox', methods=['POST'])
 def SigFox():
     data = request.get_json()
 
@@ -71,8 +71,8 @@ def SigFox():
             "body" : "La ambulancia {} acaba de detectar un(a) {} en este momento".format(id_ambulancia, tipoPulso)
         }
         jsonToSend = {
-        	"to" : token_app,
-        	"notification": bodyFirebase
+            "to" : token_app,
+            "notification": bodyFirebase
         }
 
         s = requests.post( url_firebase, json = jsonToSend, headers = headers)
@@ -82,5 +82,22 @@ def SigFox():
 
     
     return jsonify(StatusCode = str(200), Content = str("Nada que reportar"))
+
+@app.route('/prueba', methods=['POST'])
+def prueba():
+    data = request.get_json()
+    bodyFirebase = {
+        "title" : data["title"],
+        "body" :data["body"]
+    }
+    jsonToSend = {
+        "to" : token_app,
+        "notification": bodyFirebase
+    }
+
+    s = requests.post( url_firebase, json = jsonToSend, headers = headers)
+    return jsonify(StatusCode = str(s.status_code), Content = str(s.content))
+
+
 app.run()
 

@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.grupo2.iomt.db.DB;
 import com.grupo2.iomt.entity.Ambulancia;
@@ -35,6 +36,7 @@ public class GetTablesHelper {
     private RequestQueue queue;
     private String token;
     private Context context;
+    private Integer bateria;
 
     public GetTablesHelper( String token, Context context) {
         prioridades = new HashMap<>();
@@ -61,12 +63,14 @@ public class GetTablesHelper {
 
         token = token;
         context = context;
+        bateria = 0;
 
         registroPulsos = new ArrayList<>();
         pulsos = new ArrayList<>();
         ambulancias = new ArrayList<>();
 
     }
+
     private DB instanceDB(String name){
         DB db = Room.databaseBuilder(this.context, DB.class, name)
                 .allowMainThreadQueries()
@@ -197,6 +201,35 @@ public class GetTablesHelper {
         queue.add(request);
     }
 
+    public void obtenerBateria(String url){
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        System.out.println(response);
+                        try {
+                            bateria = (response.getInt("bateria"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR");
+                System.out.println(error);
+            }
+        }){
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                return params;
+            }
+        };
+        queue.add(request);
+    }
+
     public Pulso getPulso (ArrayList<Pulso> array, int id ){
         for (int i = 0; i<array.size(); i++){
             Pulso pulso= array.get(i);
@@ -232,6 +265,8 @@ public class GetTablesHelper {
             registroPulso.setAmbulancia(ambulancia);
         }
     }
+
+
 
     public ArrayList<RegistroPulso> getRegistroPulsos() {
         return registroPulsos;
@@ -295,5 +330,13 @@ public class GetTablesHelper {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Integer getBateria() {
+        return bateria;
+    }
+
+    public void setBateria(Integer bateria) {
+        this.bateria = bateria;
     }
 }
