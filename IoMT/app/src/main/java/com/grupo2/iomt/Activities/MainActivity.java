@@ -24,6 +24,8 @@ import com.grupo2.iomt.R;
 import com.grupo2.iomt.dao.TokenDao;
 import com.grupo2.iomt.db.DB;
 import com.grupo2.iomt.entity.Token;
+import com.grupo2.iomt.helpers.CheckInternet;
+import com.grupo2.iomt.helpers.CheckInternet.*;
 
 import org.json.JSONObject;
 
@@ -83,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText dt2=(EditText) findViewById(R.id.txtPasswd);
         String usuario=dt1.getText().toString();
         String contrasena=dt2.getText().toString();
-        if(false){
+
+        if(CheckInternet.errorConexion()){
             Toast.makeText(this, "No hay conexion a Internet", Toast.LENGTH_LONG).show();
         }
         else{
