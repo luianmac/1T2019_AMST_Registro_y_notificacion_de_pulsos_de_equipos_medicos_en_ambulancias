@@ -83,7 +83,7 @@ public class GraficoPulsosActivity extends AppCompatActivity {
      */
     Runnable runnable;
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grafico_pulsos);
@@ -105,15 +105,15 @@ public class GraficoPulsosActivity extends AppCompatActivity {
 
         handler = new Handler();
         runnable = new Runnable() {
-           @Override
-           public void run() {
-               registroPulsos = new ArrayList<>();
-               ambulancias = new ArrayList<>();
-               pulsos = new ArrayList<>();
-               actualizar();
-               handler.postDelayed(this, 10000);
+            @Override
+            public void run() {
+                registroPulsos = new ArrayList<>();
+                ambulancias = new ArrayList<>();
+                pulsos = new ArrayList<>();
+                actualizar();
+                handler.postDelayed(this, 10000);
             }
-       };
+        };
         runnable.run();
 
     }
@@ -171,32 +171,32 @@ public class GraficoPulsosActivity extends AppCompatActivity {
      * @param map      the map
      */
     public void setDataBarchart(BarChart barChart, Map<String, Integer> map){
-            String[] labels = new String[map.keySet().size()];
-            ArrayList<BarEntry> barEntries = new ArrayList<>();
+        String[] labels = new String[map.keySet().size()];
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
 
-            int maxValue = 0;
-            Iterator <Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
-            int counter = 0;
-            while (iterator.hasNext()){
-                Map.Entry<String, Integer> i = iterator.next();
-                String key = i.getKey();
-                Integer value = i.getValue();
-                barEntries.add(new BarEntry(counter, value));
+        int maxValue = 0;
+        Iterator <Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+        int counter = 0;
+        while (iterator.hasNext()){
+            Map.Entry<String, Integer> i = iterator.next();
+            String key = i.getKey();
+            Integer value = i.getValue();
+            barEntries.add(new BarEntry(counter, value));
 
-                labels[counter] = key;
-                counter ++;
-                if (value > maxValue)
-                    maxValue = value;
-            }
-            BarDataSet barDataSet = new BarDataSet(barEntries, "Pulsos");
-            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            labels[counter] = key;
+            counter ++;
+            if (value > maxValue)
+                maxValue = value;
+        }
+        BarDataSet barDataSet = new BarDataSet(barEntries, "Pulsos");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
 
-            BarData barData = new BarData(barDataSet);
-            //barData.setBarWidth(0.9f);
+        BarData barData = new BarData(barDataSet);
+        //barData.setBarWidth(0.9f);
 
-            barChart.setData(barData);
-            add_labels_Barchart(barChart, labels);
+        barChart.setData(barData);
+        add_labels_Barchart(barChart, labels);
 
     }
 

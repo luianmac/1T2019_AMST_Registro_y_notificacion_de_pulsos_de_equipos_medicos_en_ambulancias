@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             iniciarSesion(usuario,contrasena);
         }
-
     }
 
     private void cargarCredenciales() {
